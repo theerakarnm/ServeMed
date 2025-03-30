@@ -11,13 +11,13 @@
   },
   "devDependencies": {
     "@workspace/typescript-config": "workspace:*",
-    "@types/node": "catalog:",
-    "@types/react": "catalog:react18",
+    "@types/node": "^22.13.14",
+    "@types/react": "^18.2.20",
     "autoprefixer": "^10",
     "postcss": "^8",
     "postcss-load-config": "^6",
-    "tailwindcss": "catalog:",
-    "typescript": "catalog:"
+    "tailwindcss": "^3.4.17",
+    "typescript": "^5.1.6"
   },
   "dependencies": {
     "@types/react": "^18.3.10",

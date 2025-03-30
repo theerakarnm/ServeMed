@@ -1,4 +1,4 @@
-# Post MED Project [Remix + Hono.js Monorepo (with Bun, TurboRepo, Drizzle ORM, shadcn/ui, Biome)]
+# ServeMed Project [Remix + Hono.js Monorepo (with Bun, TurboRepo, Drizzle ORM, shadcn/ui, Biome)]
 
 This monorepo contains a full-stack TypeScript application inspired by the modern NIX stack architecture but customized for Remix, Hono.js, Drizzle ORM, Bun, TurboRepo, Biome, and shadcn/ui, following best practices.
 
@@ -24,6 +24,7 @@ monorepo/
 ## 🚀 Getting Started
 
 ### Prerequisites
+
 - [Bun](https://bun.sh/) (v1.x or higher)
 - Node.js v18+ (recommended)
 
@@ -55,6 +56,7 @@ Backend API at: [`http://localhost:3001`](http://localhost:3001)
 Located at `apps/web`
 
 Run individually:
+
 ```sh
 cd apps/web
 bun run dev
@@ -108,7 +110,7 @@ Location: `packages/types`
 Example:
 
 ```tsx
-import { createUserSchema } from '@monorepo/types'
+import { createUserSchema } from "@monorepo/types";
 ```
 
 ---
@@ -162,9 +164,11 @@ bun run format
 ## 🧹 Linting & Formatting
 
 - **Lint:**
+
 ```bash
 bun run lint
 ```
+
 - **Format:**
 
 ```bash

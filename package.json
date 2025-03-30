@@ -1,0 +1,26 @@
+{
+  "name": "postmed-project",
+  "private": true,
+  "workspaces": ["apps/*", "packages/*"],
+  "packageManager": "bun@1.2.4",
+  "scripts": {
+    "dev": "turbo run dev",
+    "build": "turbo run build",
+    "lint": "biome check .",
+    "format": "biome format . --write",
+    "build:api": "cd ./apps/api && bun run build && cd -",
+    "clean:api": "cd ./apps/api && bun run clean && cd -"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^1.9.4",
+    "turbo": "^2.4.4",
+    "typescript": "^5.8.2",
+    "@types/bun": "latest"
+  },
+  "module": "index.ts",
+  "type": "module",
+  "dependencies": {
+    "clsx": "^2.1.1",
+    "tailwind-merge": "^3.0.2"
+  }
+}

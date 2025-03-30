@@ -1,5 +1,5 @@
 {
-  "name": "@monorepo/db",
+  "name": "@workspace/db",
   "module": "index.ts",
   "type": "module",
   "private": true,

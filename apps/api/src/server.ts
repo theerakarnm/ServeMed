@@ -1,7 +1,7 @@
 import { Hono } from 'hono'
-import { db } from '@monorepo/db'
-import { schema } from '@monorepo/db'
-import { user as userType } from '@monorepo/types'
+import { db } from '@workspace/db'
+import { schema } from '@workspace/db'
+import { user as userType } from '@workspace/types'
 
 const app = new Hono()
 

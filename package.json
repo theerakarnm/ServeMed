@@ -8,6 +8,10 @@
     "build": "turbo run build",
     "lint": "biome check .",
     "format": "biome format . --write",
+    "install:all": "bun run install:api && bun run install:web && bun run install:landing",
+    "install:api": "cd ./apps/api && bun install && cd -",
+    "install:web": "cd ./apps/web && bun install && cd -",
+    "install:landing": "cd ./apps/landing && bun install && cd -",
     "build:api": "cd ./apps/api && bun run build && cd -",
     "clean:api": "cd ./apps/api && bun run clean && cd -"
   },

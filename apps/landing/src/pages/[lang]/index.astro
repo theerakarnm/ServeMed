@@ -1,0 +1,271 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { Button } from '@workspace/ui/';
+import { Card } from '@workspace/ui/card';
+import { PhoneCall, Mail, Stethoscope, Store, Users, CheckCircle2, BookOpen, ShoppingCart } from 'lucide-react';
+import { languages, defaultLang } from '../../i18n/ui';
+import { getLangFromUrl, useTranslations } from '../../utils/i18n';
+
+export function getStaticPaths() {
+	return Object.keys(languages).map(lang => ({ params: { lang } }));
+}
+
+const { lang } = Astro.params;
+const t = useTranslations(lang as keyof typeof languages);
+---
+
+<Layout
+	title='ServeMed - Your One-Stop Medical and Wellness Solution'
+	lang={lang}>
+	<main class='min-h-screen'>
+		<!-- Header/Navigation -->
+		<header class='border-b'>
+			<nav class='container mx-auto px-4 h-20 flex items-center justify-between'>
+				<div class='flex items-center gap-2'>
+					<Stethoscope className='w-8 h-8 text-[#4CAF50]' />
+					<span class='text-2xl font-bold'>ServeMed</span>
+				</div>
+				<div class='hidden md:flex items-center space-x-6'>
+					<a
+						href='#services'
+						class='text-gray-600 hover:text-gray-900'
+						>{t('nav.services')}</a
+					>
+					<a
+						href='#about'
+						class='text-gray-600 hover:text-gray-900'
+						>{t('nav.about')}</a
+					>
+					<a
+						href='#contact'
+						class='text-gray-600 hover:text-gray-900'
+						>{t('nav.contact')}</a
+					>
+					<div class='flex items-center space-x-4'>
+						{
+							Object.entries(languages).map(([code, name]) => (
+								<a
+									href={`/${code}`}
+									class={`text-sm ${lang === code ? 'text-[#4CAF50] font-bold' : 'text-gray-600'}`}>
+									{name}
+								</a>
+							))
+						}
+					</div>
+					<Button
+						variant='default'
+						class='bg-[#4CAF50] hover:bg-[#45a049]'>
+						{t('nav.book')}
+					</Button>
+				</div>
+			</nav>
+		</header>
+
+		<!-- Hero Section -->
+		<section class='relative bg-gradient-to-r from-blue-50 to-green-50 py-20'>
+			<div class='container mx-auto px-4'>
+				<div class='grid md:grid-cols-2 gap-12 items-center'>
+					<div>
+						<h1 class='text-4xl md:text-5xl font-bold text-gray-900 mb-6'>
+							{t('hero.title')}
+						</h1>
+						<p class='text-xl text-gray-600 mb-8'>
+							{t('hero.subtitle')}
+						</p>
+						<div class='flex gap-4'>
+							<Button
+								size='lg'
+								class='bg-[#4CAF50] hover:bg-[#45a049]'>
+								{t('hero.cta.start')}
+							</Button>
+							<Button
+								size='lg'
+								variant='outline'>
+								{t('hero.cta.learn')}
+							</Button>
+						</div>
+					</div>
+					<div class='relative'>
+						<img
+							src='https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&q=80'
+							alt='Medical Professional'
+							class='rounded-lg shadow-xl'
+							width='600'
+							height='400'
+						/>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- Services Section -->
+		<section
+			id='services'
+			class='py-20'>
+			<div class='container mx-auto px-4'>
+				<h2 class='text-3xl font-bold text-center mb-6'>{t('services.title')}</h2>
+				<div class='grid md:grid-cols-3 gap-8 mt-12'>
+					<Card class='relative overflow-hidden group hover:shadow-lg transition-shadow duration-300'>
+						<div class='absolute inset-0 bg-gradient-to-r from-green-50 to-blue-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300'></div>
+						<div class='p-8 relative'>
+							<div class='bg-green-100 rounded-full w-16 h-16 flex items-center justify-center mb-6'>
+								<BookOpen className='w-8 h-8 text-[#4CAF50]' />
+							</div>
+							<h3 class='text-xl font-semibold mb-3'>{t('services.guide.title')}</h3>
+							<p class='text-gray-600 mb-6'>{t('services.guide.desc')}</p>
+							<Button
+								variant='outline'
+								class='w-full'>
+								Learn More
+							</Button>
+						</div>
+					</Card>
+					<Card class='relative overflow-hidden group hover:shadow-lg transition-shadow duration-300'>
+						<div class='absolute inset-0 bg-gradient-to-r from-green-50 to-blue-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300'></div>
+						<div class='p-8 relative'>
+							<div class='bg-green-100 rounded-full w-16 h-16 flex items-center justify-center mb-6'>
+								<ShoppingCart className='w-8 h-8 text-[#4CAF50]' />
+							</div>
+							<h3 class='text-xl font-semibold mb-3'>{t('services.order.title')}</h3>
+							<p class='text-gray-600 mb-6'>{t('services.order.desc')}</p>
+							<Button
+								variant='outline'
+								class='w-full'>
+								Order Now
+							</Button>
+						</div>
+					</Card>
+					<Card class='relative overflow-hidden group hover:shadow-lg transition-shadow duration-300'>
+						<div class='absolute inset-0 bg-gradient-to-r from-green-50 to-blue-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300'></div>
+						<div class='p-8 relative'>
+							<div class='bg-green-100 rounded-full w-16 h-16 flex items-center justify-center mb-6'>
+								<Stethoscope className='w-8 h-8 text-[#4CAF50]' />
+							</div>
+							<h3 class='text-xl font-semibold mb-3'>{t('services.consult.title')}</h3>
+							<p class='text-gray-600 mb-6'>{t('services.consult.desc')}</p>
+							<Button
+								variant='outline'
+								class='w-full'>
+								Consult Now
+							</Button>
+						</div>
+					</Card>
+				</div>
+			</div>
+		</section>
+
+		<!-- Highlights Section -->
+		<section class='bg-gray-50 py-20'>
+			<div class='container mx-auto px-4'>
+				<div class='grid md:grid-cols-2 gap-12 items-center'>
+					<div>
+						<h2 class='text-3xl font-bold mb-6'>{t('highlights.title')}</h2>
+						<p class='text-lg text-gray-600 mb-8'>{t('highlights.intro')}</p>
+						<ul class='space-y-4'>
+							<li class='flex items-start gap-3'>
+								<CheckCircle2 className='w-6 h-6 text-[#4CAF50] mt-1' />
+								<span class='text-gray-700'>{t('highlights.quality')}</span>
+							</li>
+							<li class='flex items-start gap-3'>
+								<CheckCircle2 className='w-6 h-6 text-[#4CAF50] mt-1' />
+								<span class='text-gray-700'>{t('highlights.guide')}</span>
+							</li>
+							<li class='flex items-start gap-3'>
+								<CheckCircle2 className='w-6 h-6 text-[#4CAF50] mt-1' />
+								<span class='text-gray-700'>{t('highlights.innovation')}</span>
+							</li>
+							<li class='flex items-start gap-3'>
+								<CheckCircle2 className='w-6 h-6 text-[#4CAF50] mt-1' />
+								<span class='text-gray-700'>{t('highlights.ai')}</span>
+							</li>
+						</ul>
+					</div>
+					<div class='relative'>
+						<img
+							src='https://images.unsplash.com/photo-1587351021759-3e566b6af7cc?auto=format&fit=crop&q=80'
+							alt='Medical Warehouse'
+							class='rounded-lg shadow-xl'
+							width='600'
+							height='400'
+						/>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- Contact Section -->
+		<section
+			id='contact'
+			class='py-20'>
+			<div class='container mx-auto px-4'>
+				<h2 class='text-3xl font-bold text-center mb-12'>{t('contact.title')}</h2>
+				<div class='flex justify-center gap-8'>
+					<Card class='p-6 flex items-center gap-4'>
+						<PhoneCall className='w-6 h-6 text-[#4CAF50]' />
+						<div>
+							<h3 class='font-semibold'>{t('contact.phone')}</h3>
+							<p>+66 99 999 9999</p>
+						</div>
+					</Card>
+					<Card class='p-6 flex items-center gap-4'>
+						<Mail className='w-6 h-6 text-[#4CAF50]' />
+						<div>
+							<h3 class='font-semibold'>{t('contact.email')}</h3>
+							<p>contact@workspace.co</p>
+						</div>
+					</Card>
+				</div>
+			</div>
+		</section>
+
+		<!-- Footer -->
+		<footer class='bg-gray-900 text-white py-12'>
+			<div class='container mx-auto px-4'>
+				<div class='grid md:grid-cols-3 gap-8'>
+					<div>
+						<div class='flex items-center gap-2 mb-4'>
+							<Stethoscope className='w-6 h-6 text-[#4CAF50]' />
+							<span class='text-xl font-bold'>ServeMed</span>
+						</div>
+						<p class='text-gray-400'>{t('footer.tagline')}</p>
+					</div>
+					<div>
+						<h3 class='text-lg font-semibold mb-4'>{t('footer.quickLinks')}</h3>
+						<ul class='space-y-2'>
+							<li>
+								<a
+									href='#services'
+									class='text-gray-400 hover:text-white'
+									>{t('nav.services')}</a
+								>
+							</li>
+							<li>
+								<a
+									href='#about'
+									class='text-gray-400 hover:text-white'
+									>{t('nav.about')}</a
+								>
+							</li>
+							<li>
+								<a
+									href='#contact'
+									class='text-gray-400 hover:text-white'
+									>{t('nav.contact')}</a
+								>
+							</li>
+						</ul>
+					</div>
+					<div>
+						<h3 class='text-lg font-semibold mb-4'>{t('footer.contact')}</h3>
+						<ul class='space-y-2 text-gray-400'>
+							<li>{t('footer.address1')}</li>
+							<li>{t('footer.address2')}</li>
+							<li>contact@workspace.co</li>
+							<li>+66 99 999 9999</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</footer>
+	</main>
+</Layout>

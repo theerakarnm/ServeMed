@@ -83,7 +83,7 @@ Location: `packages/ui`
 Usage:
 
 ```tsx
-import { Button } from "@monorepo/ui";
+import { Button } from "@workspace/ui";
 
 export default function Component() {
   return <Button>Click me</Button>;
@@ -110,7 +110,7 @@ Location: `packages/types`
 Example:
 
 ```tsx
-import { createUserSchema } from "@monorepo/types";
+import { createUserSchema } from "@workspace/types";
 ```
 
 ---

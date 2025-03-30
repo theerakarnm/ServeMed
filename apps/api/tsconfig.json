@@ -32,8 +32,8 @@
     "composite": true,
 
     "paths": {
-      "@monorepo/types": ["../../packages/types/src"],
-      "@monorepo/db": ["../../packages/db/src"]
+      "@workspace/types": ["../../packages/types/src"],
+      "@workspace/db": ["../../packages/db/src"]
     }
   },
   "references": [

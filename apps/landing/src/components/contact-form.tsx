@@ -7,8 +7,10 @@ import { Textarea } from "@workspace/ui/components/textarea"
 import { Label } from "@workspace/ui/components/label"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@workspace/ui/components/select"
 import { CheckCircle } from "lucide-react"
+import { useTranslations } from "@/utils/i18n"
+import type { languages } from "@/i18n/ui"
 
-export function ContactForm() {
+export function ContactForm({ lang }: { lang: keyof typeof languages }) {
   const [isSubmitted, setIsSubmitted] = useState(false)
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -18,13 +20,16 @@ export function ContactForm() {
     setTimeout(() => setIsSubmitted(false), 5000)
   }
 
+  const t = useTranslations(lang as keyof typeof languages);
+
   return (
     <div className="space-y-6">
       <div>
-        <h2 className="text-3xl font-bold mb-2">Partner With ServeMed</h2>
+        <h2 className="text-3xl font-bold mb-2">
+          {t("contact.form.title")}
+        </h2>
         <p className="text-muted-foreground">
-          Interested in joining our B2B medicine supply network? Fill out the form below and our partnership team will
-          contact you.
+          {t("contact.form.desc")}
         </p>
       </div>
 
@@ -33,34 +38,44 @@ export function ContactForm() {
           <CheckCircle className="h-16 w-16 text-[#1ab16d]" />
           <h3 className="text-xl font-semibold">Thank You!</h3>
           <p className="text-center text-muted-foreground">
-            Your message has been sent successfully. We'll get back to you shortly.
+            {t("common.we.will.get.back.to.you.shortly")}
           </p>
         </div>
       ) : (
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div className="space-y-2">
-              <Label htmlFor="firstName">First Name</Label>
+              <Label htmlFor="firstName">
+                {t("common.first.name")}
+              </Label>
               <Input id="firstName" placeholder="Enter your first name" required />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="lastName">Last Name</Label>
+              <Label htmlFor="lastName">
+                {t("common.last.name")}
+              </Label>
               <Input id="lastName" placeholder="Enter your last name" required />
             </div>
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="email">Email</Label>
+            <Label htmlFor="email">
+              {t("common.email")}
+            </Label>
             <Input id="email" type="email" placeholder="Enter your email address" required />
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="phone">Phone Number</Label>
+            <Label htmlFor="phone">
+              {t("common.phone")}
+            </Label>
             <Input id="phone" type="tel" placeholder="Enter your phone number" />
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="service">Service Interested In</Label>
+            <Label htmlFor="service">
+              {t("common.service.interested.in")}
+            </Label>
             <Select>
               <SelectTrigger id="service">
                 <SelectValue placeholder="Select a service" />
@@ -76,7 +91,9 @@ export function ContactForm() {
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="message">Message</Label>
+            <Label htmlFor="message">
+              {t("common.message")}
+            </Label>
             <Textarea
               id="message"
               placeholder="Tell us about your project or inquiry"
@@ -86,7 +103,7 @@ export function ContactForm() {
           </div>
 
           <Button type="submit" className="w-full bg-[#1ab16d] hover:bg-[#159b5d] text-white">
-            Send Message
+            {t("common.send.message")}
           </Button>
         </form>
       )}

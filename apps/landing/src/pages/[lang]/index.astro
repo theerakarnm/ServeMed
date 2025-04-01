@@ -3,7 +3,7 @@ import '@workspace/ui/globals.css';
 import Layout from '../../layouts/Layout.astro';
 import { Button } from '@workspace/ui/components/button';
 import { Card } from '@workspace/ui/components/card';
-import { PhoneCall, Mail, Stethoscope, Store, Users, CheckCircle2, BookOpen, ShoppingCart } from 'lucide-react';
+import { PhoneCall, Mail, Stethoscope, Store, Users, CheckCircle2, BookOpen, ShoppingCart, Pill, PersonStanding } from 'lucide-react';
 import { languages, defaultLang } from '../../i18n/ui';
 import { getLangFromUrl, useTranslations } from '../../utils/i18n';
 import { ContactForm } from '@/components/contact-form';
@@ -75,44 +75,44 @@ const t = useTranslations(lang as keyof typeof languages);
             <div class='absolute inset-0 bg-gradient-to-r from-green-50 to-blue-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300'></div>
             <div class='p-8 relative'>
               <div class='bg-green-100 rounded-full w-16 h-16 flex items-center justify-center mb-6'>
-                <BookOpen className='w-8 h-8 text-[#4CAF50]' />
-              </div>
-              <h3 class='text-xl font-semibold mb-3'>{t('services.guide.title')}</h3>
-              <p class='text-gray-600 mb-6'>{t('services.guide.desc')}</p>
-              <Button
-                variant='outline'
-                className='w-full'>
-                Learn More
-              </Button>
-            </div>
-          </Card>
-          <Card className='relative overflow-hidden group hover:shadow-lg transition-shadow duration-300'>
-            <div class='absolute inset-0 bg-gradient-to-r from-green-50 to-blue-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300'></div>
-            <div class='p-8 relative'>
-              <div class='bg-green-100 rounded-full w-16 h-16 flex items-center justify-center mb-6'>
-                <ShoppingCart className='w-8 h-8 text-[#4CAF50]' />
-              </div>
-              <h3 class='text-xl font-semibold mb-3'>{t('services.order.title')}</h3>
-              <p class='text-gray-600 mb-6'>{t('services.order.desc')}</p>
-              <Button
-                variant='outline'
-                className='w-full'>
-                Order Now
-              </Button>
-            </div>
-          </Card>
-          <Card className='relative overflow-hidden group hover:shadow-lg transition-shadow duration-300'>
-            <div class='absolute inset-0 bg-gradient-to-r from-green-50 to-blue-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300'></div>
-            <div class='p-8 relative'>
-              <div class='bg-green-100 rounded-full w-16 h-16 flex items-center justify-center mb-6'>
                 <Stethoscope className='w-8 h-8 text-[#4CAF50]' />
               </div>
-              <h3 class='text-xl font-semibold mb-3'>{t('services.consult.title')}</h3>
-              <p class='text-gray-600 mb-6'>{t('services.consult.desc')}</p>
+              <h3 class='text-xl font-semibold mb-3'>{t('services.order.clinic.title')}</h3>
+              <p class='text-gray-600 mb-6'>{t('services.order.clinic.desc')}</p>
               <Button
                 variant='outline'
                 className='w-full'>
-                Consult Now
+                {t('common.learn.more')}
+              </Button>
+            </div>
+          </Card>
+          <Card className='relative overflow-hidden group hover:shadow-lg transition-shadow duration-300'>
+            <div class='absolute inset-0 bg-gradient-to-r from-green-50 to-blue-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300'></div>
+            <div class='p-8 relative'>
+              <div class='bg-green-100 rounded-full w-16 h-16 flex items-center justify-center mb-6'>
+                <Pill className='w-8 h-8 text-[#4CAF50]' />
+              </div>
+              <h3 class='text-xl font-semibold mb-3'>{t('services.order.pharmacy.title')}</h3>
+              <p class='text-gray-600 mb-6'>{t('services.order.pharmacy.desc')}</p>
+              <Button
+                variant='outline'
+                className='w-full'>
+                {t('common.learn.more')}
+              </Button>
+            </div>
+          </Card>
+          <Card className='relative overflow-hidden group hover:shadow-lg transition-shadow duration-300'>
+            <div class='absolute inset-0 bg-gradient-to-r from-green-50 to-blue-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300'></div>
+            <div class='p-8 relative'>
+              <div class='bg-green-100 rounded-full w-16 h-16 flex items-center justify-center mb-6'>
+                <PersonStanding className='w-8 h-8 text-[#4CAF50]' />
+              </div>
+              <h3 class='text-xl font-semibold mb-3'>{t('services.order.client.title')}</h3>
+              <p class='text-gray-600 mb-6'>{t('services.order.client.desc')}</p>
+              <Button
+                variant='outline'
+                className='w-full'>
+                {t('common.learn.more')}
               </Button>
             </div>
           </Card>
@@ -164,8 +164,8 @@ const t = useTranslations(lang as keyof typeof languages);
       id='contact'
       class='py-20 container'>
       <div class='grid grid-cols-2 mx-auto gap-6 px-4'>
-        <ContactForm />
-        <ContactInfo />
+        <ContactForm lang={lang as keyof typeof languages} />
+        <ContactInfo lang={lang as keyof typeof languages} />
       </div>
     </section>
     <!-- Footer -->

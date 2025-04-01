@@ -23,6 +23,7 @@ export const ui = {
     'common.subject': 'Subject',
     'common.service.interested.in': 'Service Interested In',
     'common.select.service': 'Select a service',
+    'common.purchase.medicine': 'Interested in purchasing medicine',
 
     'contact.info.title': 'Contact Information',
     'contact.info.desc': 'Reach out to us directly or visit our office.',
@@ -96,6 +97,7 @@ export const ui = {
     'common.subject': 'หัวข้อ',
     'common.service.interested.in': 'บริการที่สนใจ',
     'common.select.service': 'เลือกบริการ',
+    'common.purchase.medicine': 'สนใจสั่งซื้อยา',
 
     'contact.info.title': 'ข้อมูลการติดต่อ',
     'contact.info.desc': 'ติดต่อเราผ่านช่องทางต่างๆ หรือเยี่ยมชมสำนักงานของเรา',

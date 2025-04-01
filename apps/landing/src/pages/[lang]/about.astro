@@ -7,8 +7,8 @@ import { useTranslations } from '../../utils/i18n';
 import { ContactForm } from '@/components/contact-form';
 import { ContactInfo } from '@/components/contact-info';
 import { TopBar, NavigateBar } from '@/components/navbar';
+import { PartnerSection } from '@/components/partner';
 import Footers from '@/components/Footers.astro';
-
 const { lang } = Astro.params;
 
 export function getStaticPaths() {
@@ -24,7 +24,10 @@ const t = useTranslations(lang as keyof typeof languages);
   <main class='min-h-screen'>
     <!-- Header/Navigation -->
     <TopBar />
-    <NavigateBar lang={lang as keyof typeof languages} />
+    <NavigateBar
+      client:load
+      lang={lang as keyof typeof languages}
+    />
 
     <section
       id='about-us'
@@ -71,6 +74,10 @@ const t = useTranslations(lang as keyof typeof languages);
           </div>
         </div>
       </div>
+    </section>
+
+    <section id='partner'>
+      <PartnerSection client:load />
     </section>
 
     <!-- Contact Section -->

@@ -1,7 +1,7 @@
 ---
 interface Props {
-	title: string;
-	lang?: string;
+  title: string;
+  lang?: string;
 }
 
 const { title, lang = 'en' } = Astro.props;
@@ -9,61 +9,105 @@ const { title, lang = 'en' } = Astro.props;
 
 <!doctype html>
 <html lang={lang}>
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="description" content="ServeMed - Your trusted partner for medical and wellness services. We provide quality medicines, professional consultations, and comprehensive wellness programs." />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
-		
-		<!-- SEO Meta Tags -->
-		<title>{title}</title>
-		<meta name="title" content={title} />
-		<meta name="description" content="ServeMed - Your trusted partner for medical and wellness services. We provide quality medicines, professional consultations, and comprehensive wellness programs." />
-		
-		<!-- Open Graph / Facebook -->
-		<meta property="og:type" content="website" />
-		<meta property="og:url" content="https://servemed.co/" />
-		<meta property="og:title" content={title} />
-		<meta property="og:description" content="ServeMed - Your trusted partner for medical and wellness services. We provide quality medicines, professional consultations, and comprehensive wellness programs." />
-		<meta property="og:image" content="https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&q=80" />
+  <head>
+    <meta charset='UTF-8' />
+    <meta
+      name='description'
+      content='ServeMed - Your trusted partner for medical and wellness services. We provide quality medicines, professional consultations, and comprehensive wellness programs.'
+    />
+    <meta
+      name='viewport'
+      content='width=device-width'
+    />
+    <link
+      rel='icon'
+      type='image/svg+xml'
+      href='/favicon.ico'
+    />
+    <meta
+      name='generator'
+      content={Astro.generator}
+    />
 
-		<!-- Twitter -->
-		<meta property="twitter:card" content="summary_large_image" />
-		<meta property="twitter:url" content="https://servemed.co/" />
-		<meta property="twitter:title" content={title} />
-		<meta property="twitter:description" content="ServeMed - Your trusted partner for medical and wellness services. We provide quality medicines, professional consultations, and comprehensive wellness programs." />
-		<meta property="twitter:image" content="https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&q=80" />
-	</head>
-	<body>
-		<slot />
-	</body>
+    <!-- SEO Meta Tags -->
+    <title>{title}</title>
+    <meta
+      name='title'
+      content={title}
+    />
+    <meta
+      name='description'
+      content='ServeMed - Your trusted partner for medical and wellness services. We provide quality medicines, professional consultations, and comprehensive wellness programs.'
+    />
+
+    <!-- Open Graph / Facebook -->
+    <meta
+      property='og:type'
+      content='website'
+    />
+    <meta
+      property='og:url'
+      content='https://servemed.co/'
+    />
+    <meta
+      property='og:title'
+      content={title}
+    />
+    <meta
+      property='og:description'
+      content='ServeMed - Your trusted partner for medical and wellness services. We provide quality medicines, professional consultations, and comprehensive wellness programs.'
+    />
+    <meta
+      property='og:image'
+      content='https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&q=80'
+    />
+
+    <!-- Twitter -->
+    <meta
+      property='twitter:card'
+      content='summary_large_image'
+    />
+    <meta
+      property='twitter:url'
+      content='https://servemed.co/'
+    />
+    <meta
+      property='twitter:title'
+      content={title}
+    />
+    <meta
+      property='twitter:description'
+      content='ServeMed - Your trusted partner for medical and wellness services. We provide quality medicines, professional consultations, and comprehensive wellness programs.'
+    />
+    <meta
+      property='twitter:image'
+      content='https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&q=80'
+    />
+  </head>
+  <body>
+    <slot />
+  </body>
 </html>
 <style is:global>
-	:root {
-		--accent: 136, 58, 234;
-		--accent-light: 224, 204, 250;
-		--accent-dark: 49, 10, 101;
-		--accent-gradient: linear-gradient(
-			45deg,
-			rgb(var(--accent)),
-			rgb(var(--accent-light)) 30%,
-			white 60%
-		);
-	}
-	html {
-		font-family: system-ui, sans-serif;
-		scroll-behavior: smooth;
-	}
-	code {
-		font-family:
-			Menlo,
-			Monaco,
-			Lucida Console,
-			Liberation Mono,
-			DejaVu Sans Mono,
-			Bitstream Vera Sans Mono,
-			Courier New,
-			monospace;
-	}
+  :root {
+    --accent: 136, 58, 234;
+    --accent-light: 224, 204, 250;
+    --accent-dark: 49, 10, 101;
+    --accent-gradient: linear-gradient(45deg, rgb(var(--accent)), rgb(var(--accent-light)) 30%, white 60%);
+  }
+  html {
+    font-family: system-ui, sans-serif;
+    scroll-behavior: smooth;
+  }
+  code {
+    font-family:
+      Menlo,
+      Monaco,
+      Lucida Console,
+      Liberation Mono,
+      DejaVu Sans Mono,
+      Bitstream Vera Sans Mono,
+      Courier New,
+      monospace;
+  }
 </style>

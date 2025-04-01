@@ -28,30 +28,32 @@ const t = useTranslations(lang as keyof typeof languages);
     <NavigateBar lang={lang as keyof typeof languages} />
 
     <!-- Hero Section -->
-    <section class='relative container bg-gradient-to-r from-blue-50 to-green-50 py-20'>
-      <div class='container mx-auto px-4'>
-        <div class='grid md:grid-cols-2 gap-12 items-center'>
-          <div>
-            <h1 class='text-4xl md:text-5xl font-bold text-gray-900 mb-6'>
-              {t('hero.title')}
-            </h1>
-            <p class='text-xl text-gray-600 mb-8'>
-              {t('hero.subtitle')}
-            </p>
-            <div class='flex gap-4'>
-              <Button
-                size='lg'
-                className='bg-[#4CAF50] hover:bg-[#45a049]'>
-                {t('hero.cta.start')}
-              </Button>
-              <Button
-                size='lg'
-                variant='outline'>
-                {t('hero.cta.learn')}
-              </Button>
+    <section class='relative bg-cover bg-[url(/cover.avif)]'>
+      <div class='relative container bg-gradient-to-r from-blue-50 to-transparent bg-opacity-10 py-20'>
+        <div class='container mx-auto px-4 bg-gradient-to-r'>
+          <div class='grid md:grid-cols-2 gap-12 items-center'>
+            <div>
+              <h1 class='text-4xl md:text-5xl font-bold text-gray-900 mb-6'>
+                {t('hero.title')}
+              </h1>
+              <p class='text-xl text-gray-600 mb-8'>
+                {t('hero.subtitle')}
+              </p>
+              <div class='flex gap-4'>
+                <Button
+                  size='lg'
+                  className='bg-[#4CAF50] hover:bg-[#45a049]'>
+                  {t('hero.cta.start')}
+                </Button>
+                <Button
+                  size='lg'
+                  variant='outline'>
+                  {t('hero.cta.learn')}
+                </Button>
+              </div>
             </div>
-          </div>
-          <div class='relative'>
+
+            <!-- <div class='relative'>
             <img
               src='https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&q=80'
               alt='Medical Professional'
@@ -59,6 +61,7 @@ const t = useTranslations(lang as keyof typeof languages);
               width='600'
               height='400'
             />
+          </div> -->
           </div>
         </div>
       </div>
@@ -128,21 +131,21 @@ const t = useTranslations(lang as keyof typeof languages);
             <h2 class='text-3xl font-bold mb-6'>{t('highlights.title')}</h2>
             <p class='text-lg text-gray-600 mb-8'>{t('highlights.intro')}</p>
             <ul class='space-y-4'>
-              <li class='flex items-start gap-3'>
+              <li class='grid grid-cols-12 items-start gap-3'>
                 <CheckCircle2 className='w-6 h-6 text-[#4CAF50] mt-1' />
-                <span class='text-gray-700'>{t('highlights.quality')}</span>
+                <span class='text-gray-700 col-span-11'>{t('highlights.quality')}</span>
               </li>
-              <li class='flex items-start gap-3'>
+              <li class='grid grid-cols-12 items-start gap-3'>
                 <CheckCircle2 className='w-6 h-6 text-[#4CAF50] mt-1' />
-                <span class='text-gray-700'>{t('highlights.guide')}</span>
+                <span class='text-gray-700 col-span-11'>{t('highlights.guide')}</span>
               </li>
-              <li class='flex items-start gap-3'>
+              <li class='grid grid-cols-12 items-start gap-3'>
                 <CheckCircle2 className='w-6 h-6 text-[#4CAF50] mt-1' />
-                <span class='text-gray-700'>{t('highlights.innovation')}</span>
+                <span class='text-gray-700 col-span-11'>{t('highlights.innovation')}</span>
               </li>
-              <li class='flex items-start gap-3'>
+              <li class='grid grid-cols-12 items-start gap-3'>
                 <CheckCircle2 className='w-6 h-6 text-[#4CAF50] mt-1' />
-                <span class='text-gray-700'>{t('highlights.ai')}</span>
+                <span class='text-gray-700 col-span-11'>{t('highlights.ai')}</span>
               </li>
             </ul>
           </div>

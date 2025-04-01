@@ -6,12 +6,16 @@ import { Card } from '@workspace/ui/components/card';
 import { PhoneCall, Mail, Stethoscope, Store, Users, CheckCircle2, BookOpen, ShoppingCart } from 'lucide-react';
 import { languages, defaultLang } from '../../i18n/ui';
 import { getLangFromUrl, useTranslations } from '../../utils/i18n';
+import { ContactForm } from '@/components/contact-form';
+import { ContactInfo } from '@/components/contact-info';
+import { TopBar, NavigateBar } from '@/components/navbar';
+
+const { lang } = Astro.params;
 
 export function getStaticPaths() {
   return Object.keys(languages).map(lang => ({ params: { lang } }));
 }
 
-const { lang } = Astro.params;
 const t = useTranslations(lang as keyof typeof languages);
 ---
 
@@ -20,50 +24,11 @@ const t = useTranslations(lang as keyof typeof languages);
   lang={lang}>
   <main class='min-h-screen'>
     <!-- Header/Navigation -->
-    <header class='border-b'>
-      <nav class='container mx-auto px-4 h-20 flex items-center justify-between'>
-        <div class='flex items-center gap-2'>
-          <Stethoscope className='w-8 h-8 text-[#4CAF50]' />
-          <span class='text-2xl font-bold'>ServeMed</span>
-        </div>
-        <div class='hidden md:flex items-center space-x-6'>
-          <a
-            href='#services'
-            class='text-gray-600 hover:text-gray-900'
-            >{t('nav.services')}</a
-          >
-          <a
-            href='#about'
-            class='text-gray-600 hover:text-gray-900'
-            >{t('nav.about')}</a
-          >
-          <a
-            href='#contact'
-            class='text-gray-600 hover:text-gray-900'
-            >{t('nav.contact')}</a
-          >
-          <div class='flex items-center space-x-4'>
-            {
-              Object.entries(languages).map(([code, name]) => (
-                <a
-                  href={`/${code}`}
-                  class={`text-sm ${lang === code ? 'text-[#4CAF50] font-bold' : 'text-gray-600'}`}>
-                  {name}
-                </a>
-              ))
-            }
-          </div>
-          <Button
-            variant='default'
-            className='bg-[#4CAF50] hover:bg-[#45a049]'>
-            {t('nav.book')}
-          </Button>
-        </div>
-      </nav>
-    </header>
+    <TopBar />
+    <NavigateBar lang={lang as keyof typeof languages} />
 
     <!-- Hero Section -->
-    <section class='relative bg-gradient-to-r from-blue-50 to-green-50 py-20'>
+    <section class='relative container bg-gradient-to-r from-blue-50 to-green-50 py-20'>
       <div class='container mx-auto px-4'>
         <div class='grid md:grid-cols-2 gap-12 items-center'>
           <div>
@@ -156,7 +121,7 @@ const t = useTranslations(lang as keyof typeof languages);
     </section>
 
     <!-- Highlights Section -->
-    <section class='bg-gray-50 py-20'>
+    <section class='bg-gray-50 py-20 container'>
       <div class='container mx-auto px-4'>
         <div class='grid md:grid-cols-2 gap-12 items-center'>
           <div>
@@ -197,28 +162,12 @@ const t = useTranslations(lang as keyof typeof languages);
     <!-- Contact Section -->
     <section
       id='contact'
-      class='py-20'>
-      <div class='container mx-auto px-4'>
-        <h2 class='text-3xl font-bold text-center mb-12'>{t('contact.title')}</h2>
-        <div class='flex justify-center gap-8'>
-          <Card className='p-6 flex items-center gap-4'>
-            <PhoneCall className='w-6 h-6 text-[#4CAF50]' />
-            <div>
-              <h3 class='font-semibold'>{t('contact.phone')}</h3>
-              <p>+66 99 999 9999</p>
-            </div>
-          </Card>
-          <Card className='p-6 flex items-center gap-4'>
-            <Mail className='w-6 h-6 text-[#4CAF50]' />
-            <div>
-              <h3 class='font-semibold'>{t('contact.email')}</h3>
-              <p>contact@workspace.co</p>
-            </div>
-          </Card>
-        </div>
+      class='py-20 container'>
+      <div class='grid grid-cols-2 mx-auto gap-6 px-4'>
+        <ContactForm />
+        <ContactInfo />
       </div>
     </section>
-
     <!-- Footer -->
     <footer class='bg-gray-900 text-white py-12'>
       <div class='container mx-auto px-4'>

@@ -65,6 +65,18 @@ export const ui = {
     'footer.contact': 'Contact',
     'footer.address1': '123 Medical Center Street',
     'footer.address2': 'Bangkok, Thailand',
+
+    'about.title': 'About Us',
+    'about.subtitle': 'ServeMed is a healthcare and wellness service provider committed to delivering quality services',
+
+    'about.mission': 'Our Mission',
+    'about.mission.desc': 'We aim to facilitate easier access to quality and reliable medications and medical supplies for healthcare facilities, including clinics and pharmacies. Additionally, we strive to provide accurate and comprehensive knowledge regarding proper medication usage.',
+
+    'about.vision': 'Our Vision',
+    'about.vision.desc': 'As the platform owners are doctors, we aim to revolutionize the pharmaceutical industry by providing healthcare facilities with access to quality and innovative medications. Additionally, we seek to prevent the distribution of counterfeit or illegal drugs, all of which ultimately benefit patients and service recipients.',
+
+    'about.who.we.are': 'Who We Are',
+    'about.who.we.are.desc': 'The ServeMed platform originated as a startup business founded by a team of doctors who experienced the inconvenience of sourcing and ordering medications. They began by establishing and developing an online pharmacy platform in 2024, which received very positive feedback. Consequently, they planned to expand into a full-fledged E-commerce platform that researches and supplies rare and innovative drugs for doctors and pharmacists, as well as creates comprehensive drug usage guides.',
   },
   th: {
     'common.learn.more': 'เรียนรู้เพิ่มเติม',
@@ -127,5 +139,17 @@ export const ui = {
     'footer.contact': 'ติดต่อ',
     'footer.address1': '123 ถนนศูนย์การแพทย์',
     'footer.address2': 'กรุงเทพมหานคร, ประเทศไทย',
+
+    'about.title': 'เกี่ยวกับเรา',
+    'about.subtitle': 'ServeMed คือผู้ให้บริการด้านการแพทย์และสุขภาพที่มุ่งมั่นในการให้บริการที่มีคุณภาพ',
+
+    'about.mission': 'พันธกิจของเรา',
+    'about.mission.desc': 'เราต้องการ ทำให้สถานพยาบาลทั้งคลินิกเเละร้านขายยา เข้าถึงยา สินค้าทางการเเพทย์ที่มีคุณภาพเเละน่าเชื่อถือได้ง่ายขึ้น รวมถึงได้รับความรู้ทางการใช้ยาอย่างถูกต้องเเละเเม่นยำ',
+
+    'about.vision': 'วิสัยทัศน์ของเรา',
+    'about.vision.desc': 'เนื่องจากที่เจ้าของเเพลตฟอร์มเป็นเเพทย์  เราจึงต้องการมาปฏิวัติวงการยา ทำให้สถานพยาบาลเข้าถึงยาที่มีคุณภาพเเละมีความเป็นวัตกรรม รวมถึงป้องกันการได้รับสินค้าปลอมเเปลง หรือยาเถื่อน ล้วนเเต่ส่งผลดีให้แก่ผู้ป่วยหรือผู้รับบริการ',
+
+    'about.who.we.are': 'ความเป็นมา',
+    'about.who.we.are.desc': 'แพลตฟอร์ม Serve Med เริ่มต้นจากธุรกิจ Start Up ที่ก่อตั้งโดยทีมแพทย์ ที่ประสบปัญหาความไม่สะดวกในการจัดหาและสั่งซื้อยา โดยเริ่มต้นการจัดหาและทำแพลตฟอร์มร้านขายยาออนไลน์ เมื่อปี 2567 ซึ่งได้รับการตอบรับที่ดีมาก จึงได้วางแผนพัฒนาเป็นแพลตฟอร์ม E-Commerce เต็มรูปแบบ ที่มีการวิจัยยาและจัดหายาหายาก ยานวัตกรรม สำหรับคุณหมอและเภสัชกร รวมถึงสร้างคู่มือความรู้การใช้ยาอย่างถูกวิธี',
   },
 } as const;

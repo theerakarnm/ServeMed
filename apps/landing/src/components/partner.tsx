@@ -1,6 +1,20 @@
 import React from 'react'
 import { Card, CardContent } from '@workspace/ui/components/card';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@workspace/ui/components/carousel';
+import { cn } from '@workspace/ui/lib/utils';
+import Autoplay from "embla-carousel-autoplay"
+
+const partnerList = [
+  '/partners/bitsocial.png',
+  '/partners/gpo.png',
+  '/partners/NIA.svg',
+  '/partners/sandbox88.png',
+  '/partners/ted.png',
+  '/partners/thailand-startup.png',
+  '/partners/pmcu.png',
+  '/partners/thailand-fund.png',
+  '/partners/martech.webp',
+]
 
 const PartnerSection = () => {
   return (
@@ -8,18 +22,28 @@ const PartnerSection = () => {
       opts={{
         align: 'start',
       }}
-      className='w-full max-w-sm'>
+      plugins={[
+        Autoplay({
+          delay: 2000,
+        }),
+      ]}
+      className='w-full max-w-3xl'>
       <CarouselContent>
         {
-          Array.from({ length: 5 }).map((_, index) => (
+          partnerList.map((key, index) => (
             <CarouselItem
-              // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
-              key={index}
-              className='md:basis-1/2 lg:basis-1/3'>
+              key={key}
+              className='md:basis-1/3 lg:basis-1/5'>
               <div className='p-1'>
-                <Card>
-                  <CardContent className='flex aspect-square items-center justify-center p-6'>
-                    <span className='text-3xl font-semibold'>{index + 1}</span>
+                <Card className='flex aspect-square items-center justify-center'>
+                  <CardContent className={cn('flex aspect-square items-center justify-center p-2', {
+                    'bg-gray-800': index === 0,
+                  })}>
+                    <img
+                      src={key}
+                      alt='partner logo'
+                      className='h-full w-full object-contain'
+                    />
                   </CardContent>
                 </Card>
               </div>

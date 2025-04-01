@@ -76,9 +76,19 @@ const t = useTranslations(lang as keyof typeof languages);
       </div>
     </section>
 
-    <section id='partner'>
-      <PartnerSection client:load />
+    <section
+      id='partner'
+      class='mb-10'>
+      <div class='text-center'>
+        <h2 class='text-3xl md:text-4xl font-bold mb-8'>We extend our sincere thanks to all supporting agencies.</h2>
+        <!-- <p class='text-lg text-muted-foreground max-w-3xl mx-auto'>Learn more about our mission, vision, and the team behind ServeMed's innovative healthcare solutions.</p> -->
+      </div>
+      <div class='w-full flex justify-center'>
+        <PartnerSection client:load />
+      </div>
     </section>
+
+    <hr />
 
     <!-- Contact Section -->
     <section

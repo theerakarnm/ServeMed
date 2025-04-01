@@ -25,7 +25,10 @@ const t = useTranslations(lang as keyof typeof languages);
   <main class='min-h-screen'>
     <!-- Header/Navigation -->
     <TopBar />
-    <NavigateBar lang={lang as keyof typeof languages} />
+    <NavigateBar
+      client:only
+      lang={lang as keyof typeof languages}
+    />
 
     <!-- Hero Section -->
     <section class='relative bg-cover bg-[url(/cover.avif)]'>

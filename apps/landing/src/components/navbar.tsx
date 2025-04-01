@@ -23,6 +23,8 @@ const TopBar = () => {
 
 const NavigateBar = ({ lang }: { lang: keyof typeof languages }) => {
   const t = useTranslations(lang as keyof typeof languages);
+  const path = window.location.pathname;
+  const currentLang = path.split('/')[1];
   return (
     <>
       <header className="bg-white shadow-sm">
@@ -35,13 +37,13 @@ const NavigateBar = ({ lang }: { lang: keyof typeof languages }) => {
           </div>
 
           <nav className="hidden md:flex items-center gap-6 text-gray-700">
-            <a href="/" className="hover:text-green-600">
+            <a href={`/${currentLang}/`} className="hover:text-green-600">
               {t('nav.services')}
             </a>
-            <a href="/about" className="hover:text-green-600">
+            <a href={`/${currentLang}/about`} className="hover:text-green-600">
               {t('nav.about')}
             </a>
-            <a href="/" className="hover:text-green-600">
+            <a href={`/${currentLang}/`} className="hover:text-green-600">
               {t('nav.contact')}
             </a>
           </nav>
@@ -51,7 +53,7 @@ const NavigateBar = ({ lang }: { lang: keyof typeof languages }) => {
                 Object.entries(languages).map(([code, name]) => (
                   <a
                     key={code}
-                    href={`/${code}`}
+                    href={`/${code}${path.slice(3)}`}
                     className={`text-sm ${lang === code ? 'text-[#4CAF50] font-bold' : 'text-gray-600'}`}>
                     {name}
                   </a>

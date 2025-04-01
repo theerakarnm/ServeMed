@@ -25,7 +25,7 @@ const t = useTranslations(lang as keyof typeof languages);
     <!-- Header/Navigation -->
     <TopBar />
     <NavigateBar
-      client:load
+      client:only
       lang={lang as keyof typeof languages}
     />
 
@@ -34,8 +34,12 @@ const t = useTranslations(lang as keyof typeof languages);
       class='py-20 container'>
       <div class='space-y-12'>
         <div class='text-center'>
-          <h2 class='text-3xl md:text-4xl font-bold mb-4'>Get to Know Us</h2>
-          <p class='text-lg text-muted-foreground max-w-3xl mx-auto'>Learn more about our mission, vision, and the team behind ServeMed's innovative healthcare solutions.</p>
+          <h2 class='text-3xl md:text-4xl font-bold mb-4'>
+            {t('about.title')}
+          </h2>
+          <p class='text-lg text-muted-foreground max-w-3xl mx-auto'>
+            {t('about.subtitle')}
+          </p>
         </div>
 
         <div class='grid grid-cols-1 md:grid-cols-3 gap-8'>
@@ -44,10 +48,9 @@ const t = useTranslations(lang as keyof typeof languages);
             <div class='w-12 h-12 rounded-full bg-[#1ab16d]/10 flex items-center justify-center mb-6'>
               <CheckCircle className='h-6 w-6 text-[#1ab16d]' />
             </div>
-            <h3 class='text-xl font-bold mb-3'>Who We Are</h3>
+            <h3 class='text-xl font-bold mb-3'>{t('about.who.we.are')}</h3>
             <p class='text-muted-foreground'>
-              ServeMed is a leading B2B e-commerce platform connecting pharmaceutical suppliers with clinics and healthcare facilities. Founded in 2018, we've revolutionized the medical supply chain by creating a transparent, efficient marketplace for healthcare providers to source quality
-              medicines.
+              {t('about.who.we.are.desc')}
             </p>
           </div>
 
@@ -56,9 +59,11 @@ const t = useTranslations(lang as keyof typeof languages);
             <div class='w-12 h-12 rounded-full bg-[#1ab16d]/10 flex items-center justify-center mb-6'>
               <CheckCircle className='h-6 w-6 text-[#1ab16d]' />
             </div>
-            <h3 class='text-xl font-bold mb-3'>Our Vision</h3>
+            <h3 class='text-xl font-bold mb-3'>
+              {t('about.vision')}
+            </h3>
             <p class='text-muted-foreground'>
-              We envision a healthcare ecosystem where clinics of all sizes have equal access to quality medicines at fair prices. Our goal is to create the most trusted B2B pharmaceutical marketplace that empowers healthcare providers to focus on patient care rather than supply chain challenges.
+              {t('about.vision.desc')}
             </p>
           </div>
 
@@ -67,9 +72,9 @@ const t = useTranslations(lang as keyof typeof languages);
             <div class='w-12 h-12 rounded-full bg-[#1ab16d]/10 flex items-center justify-center mb-6'>
               <CheckCircle className='h-6 w-6 text-[#1ab16d]' />
             </div>
-            <h3 class='text-xl font-bold mb-3'>Our Mission</h3>
+            <h3 class='text-xl font-bold mb-3'>{t('about.mission')}</h3>
             <p class='text-muted-foreground'>
-              Our mission is to streamline the pharmaceutical supply chain by connecting clinics directly with verified suppliers. We are committed to ensuring reliability, transparency, and efficiency in every transaction while building lasting partnerships that strengthen the healthcare industry.
+              {t('about.mission.desc')}
             </p>
           </div>
         </div>

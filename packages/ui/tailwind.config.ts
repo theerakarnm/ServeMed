@@ -10,6 +10,7 @@ const config = {
     "./app/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}",
     "./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}",
     "../../packages/ui/src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}",
+    "./app/**/{**,.client,.server}/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}"
   ],
   prefix: "",
   theme: {

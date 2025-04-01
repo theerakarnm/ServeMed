@@ -3,7 +3,7 @@ import '@workspace/ui/globals.css';
 import Layout from '../../layouts/Layout.astro';
 import { Button } from '@workspace/ui/components/button';
 import { Card } from '@workspace/ui/components/card';
-import { PhoneCall, Mail, Stethoscope, Store, Users, CheckCircle2, BookOpen, ShoppingCart, Pill, PersonStanding } from 'lucide-react';
+import { PhoneCall, Mail, Stethoscope, Store, Users, CheckCircle2, BookOpen, ShoppingCart, Pill, PersonStanding, User, CheckCircle } from 'lucide-react';
 import { languages, defaultLang } from '../../i18n/ui';
 import { getLangFromUrl, useTranslations } from '../../utils/i18n';
 import { ContactForm } from '@/components/contact-form';
@@ -33,7 +33,7 @@ const t = useTranslations(lang as keyof typeof languages);
 
     <!-- Hero Section -->
     <section class='relative bg-cover bg-[url(/cover.avif)]'>
-      <div class='relative container bg-gradient-to-r from-blue-100 to-transparent bg-opacity-20'>
+      <div class='relative bg-gradient-to-r from-blue-100 to-transparent bg-opacity-20'>
         <div class='container mx-auto px-4 py-20'>
           <div class='grid md:grid-cols-2 gap-12 items-center'>
             <div>
@@ -118,6 +118,49 @@ const t = useTranslations(lang as keyof typeof languages);
               </Button>
             </div>
           </Card>
+        </div>
+      </div>
+    </section>
+
+    <section
+      id='about'
+      class='relative'>
+      <div class='w-full pr-12 py-12 md:py-24 bg-white grid grid-cols-12 gap-4'>
+        <div class='flex justify-center col-span-12 xl:col-span-7 pr-4 md:pr-6'>
+          <div class='flex flex-col md:flex-row gap-12 items-center relative'>
+            <div class='w-[20rem] container flex justify-center flex-col h-20 bg-gradient-to-r from-[#B1DDF9] from-30% to-transparent bg-opacity-50 absolute bottom-[38%] sm:bottom-[30%] md:bottom-[15%] xl:bottom-[15%]'>
+              <p class='font-bold text-xl'>นพ. ธนกร ยนต์นิยม</p>
+              <p>ผู้ก่อตั้งร่วม เเพลตฟอร์ม Serve Med</p>
+            </div>
+            <div class='md:w-1/3 flex flex-col items-center'>
+              <img src='/md_thanakon.svg' />
+              <!-- <h2 class='text-2xl font-bold mb-2'>About Us</h2> -->
+              <!-- <p class='text-center text-muted-foreground'>เกี่ยวกับเรา</p> -->
+            </div>
+            <div class='md:w-2/3 space-y-4 container md:container-none'>
+              <p class='text-muted-foreground'>Founded in 2010, PharmWell has been dedicated to providing high-quality pharmaceutical and wellness products to our customers. Our team of experienced pharmacists and wellness experts are committed to helping you achieve optimal health.</p>
+              <p class='text-muted-foreground'>ก่อตั้งขึ้นในปี 2010 PharmWell มุ่งมั่นที่จะให้บริการผลิตภัณฑ์ยาและสุขภาพที่มีคุณภาพสูงแก่ลูกค้าของเรา ทีมเภสัชกรและผู้เชี่ยวชาญด้านสุขภาพที่มีประสบการณ์ของเรามุ่งมั่นที่จะช่วยให้คุณมีสุขภาพที่ดีที่สุด</p>
+            </div>
+          </div>
+        </div>
+        <div class='col-span-12 container xl:container-none xl:col-span-5 space-y-4'>
+          {/* Vision */}
+          <div class='bg-white p-8 rounded-lg shadow-sm border border-gray-100 hover:shadow-md transition-shadow'>
+            <h3 class='text-xl font-bold mb-3'>
+              {t('about.vision')}
+            </h3>
+            <p class='text-muted-foreground'>
+              {t('about.vision.desc')}
+            </p>
+          </div>
+
+          {/* Mission */}
+          <div class='bg-white p-8 rounded-lg shadow-sm border border-gray-100 hover:shadow-md transition-shadow'>
+            <h3 class='text-xl font-bold mb-3'>{t('about.mission')}</h3>
+            <p class='text-muted-foreground'>
+              {t('about.mission.desc')}
+            </p>
+          </div>
         </div>
       </div>
     </section>

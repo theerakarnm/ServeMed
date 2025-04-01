@@ -1,0 +1,136 @@
+---
+import '@workspace/ui/globals.css';
+import Layout from '../../layouts/Layout.astro';
+import { Button } from '@workspace/ui/components/button';
+import { Card } from '@workspace/ui/components/card';
+import { PhoneCall, Mail, Stethoscope, Store, Users, CheckCircle2, BookOpen, ShoppingCart, Pill, PersonStanding, CheckCircle } from 'lucide-react';
+import { languages, defaultLang } from '../../i18n/ui';
+import { getLangFromUrl, useTranslations } from '../../utils/i18n';
+import { ContactForm } from '@/components/contact-form';
+import { ContactInfo } from '@/components/contact-info';
+import { TopBar, NavigateBar } from '@/components/navbar';
+
+const { lang } = Astro.params;
+
+export function getStaticPaths() {
+  return Object.keys(languages).map(lang => ({ params: { lang } }));
+}
+
+const t = useTranslations(lang as keyof typeof languages);
+---
+
+<Layout
+  title='ServeMed - Your One-Stop Medical and Wellness Solution'
+  lang={lang}>
+  <main class='min-h-screen'>
+    <!-- Header/Navigation -->
+    <TopBar />
+    <NavigateBar lang={lang as keyof typeof languages} />
+
+    <section
+      id='about-us'
+      class='py-20 container'>
+      <div class='space-y-12'>
+        <div class='text-center'>
+          <h2 class='text-3xl md:text-4xl font-bold mb-4'>Get to Know Us</h2>
+          <p class='text-lg text-muted-foreground max-w-3xl mx-auto'>Learn more about our mission, vision, and the team behind ServeMed's innovative healthcare solutions.</p>
+        </div>
+
+        <div class='grid grid-cols-1 md:grid-cols-3 gap-8'>
+          {/* Who We Are */}
+          <div class='bg-white p-8 rounded-lg shadow-sm border border-gray-100 hover:shadow-md transition-shadow'>
+            <div class='w-12 h-12 rounded-full bg-[#1ab16d]/10 flex items-center justify-center mb-6'>
+              <CheckCircle className='h-6 w-6 text-[#1ab16d]' />
+            </div>
+            <h3 class='text-xl font-bold mb-3'>Who We Are</h3>
+            <p class='text-muted-foreground'>
+              ServeMed is a leading B2B e-commerce platform connecting pharmaceutical suppliers with clinics and healthcare facilities. Founded in 2018, we've revolutionized the medical supply chain by creating a transparent, efficient marketplace for healthcare providers to source quality
+              medicines.
+            </p>
+          </div>
+
+          {/* Vision */}
+          <div class='bg-white p-8 rounded-lg shadow-sm border border-gray-100 hover:shadow-md transition-shadow'>
+            <div class='w-12 h-12 rounded-full bg-[#1ab16d]/10 flex items-center justify-center mb-6'>
+              <CheckCircle className='h-6 w-6 text-[#1ab16d]' />
+            </div>
+            <h3 class='text-xl font-bold mb-3'>Our Vision</h3>
+            <p class='text-muted-foreground'>
+              We envision a healthcare ecosystem where clinics of all sizes have equal access to quality medicines at fair prices. Our goal is to create the most trusted B2B pharmaceutical marketplace that empowers healthcare providers to focus on patient care rather than supply chain challenges.
+            </p>
+          </div>
+
+          {/* Mission */}
+          <div class='bg-white p-8 rounded-lg shadow-sm border border-gray-100 hover:shadow-md transition-shadow'>
+            <div class='w-12 h-12 rounded-full bg-[#1ab16d]/10 flex items-center justify-center mb-6'>
+              <CheckCircle className='h-6 w-6 text-[#1ab16d]' />
+            </div>
+            <h3 class='text-xl font-bold mb-3'>Our Mission</h3>
+            <p class='text-muted-foreground'>
+              Our mission is to streamline the pharmaceutical supply chain by connecting clinics directly with verified suppliers. We are committed to ensuring reliability, transparency, and efficiency in every transaction while building lasting partnerships that strengthen the healthcare industry.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section
+      id='contact'
+      class='py-20 container'>
+      <div class='grid grid-cols-2 mx-auto gap-6 px-4'>
+        <ContactForm lang={lang as keyof typeof languages} />
+        <ContactInfo lang={lang as keyof typeof languages} />
+      </div>
+    </section>
+    <!-- Footer -->
+    <footer class='bg-gray-900 text-white py-12'>
+      <div class='container mx-auto px-4'>
+        <div class='grid md:grid-cols-3 gap-8'>
+          <div>
+            <div class='flex items-center gap-2 mb-4'>
+              <Stethoscope className='w-6 h-6 text-[#4CAF50]' />
+              <span class='text-xl font-bold'>ServeMed</span>
+            </div>
+            <p class='text-gray-400'>{t('footer.tagline')}</p>
+          </div>
+          <div>
+            <h3 class='text-lg font-semibold mb-4'>{t('footer.quickLinks')}</h3>
+            <ul class='space-y-2'>
+              <li>
+                <a
+                  href='#services'
+                  class='text-gray-400 hover:text-white'
+                  >{t('nav.services')}</a
+                >
+              </li>
+              <li>
+                <a
+                  href='#about'
+                  class='text-gray-400 hover:text-white'
+                  >{t('nav.about')}</a
+                >
+              </li>
+              <li>
+                <a
+                  href='#contact'
+                  class='text-gray-400 hover:text-white'
+                  >{t('nav.contact')}</a
+                >
+              </li>
+            </ul>
+          </div>
+          <div>
+            <h3 class='text-lg font-semibold mb-4'>{t('footer.contact')}</h3>
+            <ul class='space-y-2 text-gray-400'>
+              <li>{t('footer.address1')}</li>
+              <li>{t('footer.address2')}</li>
+              <li>contact@workspace.co</li>
+              <li>+66 99 999 9999</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </main>
+</Layout>

@@ -31,18 +31,14 @@ const NavigateBar = ({ lang }: { lang: keyof typeof languages }) => {
             <Button className="md:hidden">
               <Menu className="w-6 h-6" />
             </Button>
-            <div className="flex items-center">
-              <span className="text-blue-900 font-bold text-xl">SERVE</span>
-              <span className="text-green-600 font-bold text-xl">MED</span>
-            </div>
-            <div className="text-[8px] text-gray-500 hidden md:block">ALWAYS SERVE QUALITY MEDICINES</div>
+            <img src="/ServeMedLogo.avif" alt="Logo" className="h-10" />
           </div>
 
           <nav className="hidden md:flex items-center gap-6 text-gray-700">
             <a href="/" className="hover:text-green-600">
               {t('nav.services')}
             </a>
-            <a href="/" className="hover:text-green-600">
+            <a href="/about" className="hover:text-green-600">
               {t('nav.about')}
             </a>
             <a href="/" className="hover:text-green-600">

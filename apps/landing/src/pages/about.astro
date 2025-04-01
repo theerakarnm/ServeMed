@@ -1,0 +1,8 @@
+---
+import { defaultLang } from '../i18n/ui';
+export const prerender = false;
+
+if (Astro.request.method === 'GET') {
+  return Astro.redirect(`/${defaultLang}/about`);
+}
+---

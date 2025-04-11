@@ -1,33 +1,43 @@
-import { useLoaderData } from "@remix-run/react"
-import { db } from "@workspace/db/src"
-import { productCategories, products } from "@workspace/db/src/schema"
 import { eq } from "drizzle-orm"
-import { ProductForm } from "~/components/products/product-form"
+import { Button } from "@workspace/ui/components/button"
+import { PlusCircle } from "lucide-react"
+import { Link, useLoaderData } from "@remix-run/react"
+import { db } from "@workspace/db/src"
+import { productImages } from "@workspace/db/src/schema"
+import { ProductImagesGrid } from "~/components/products/product-images-grid"
 import MainLayout from "~/layouts/MainLayout"
 
-export default function EditProductPage({ params }: { params: { id: string } }) {
+export default function ProductImagesPage({ params }: { params: { id: string } }) {
 
   const {
-    product,
-    selectedCategoryIds,
-    brandsData,
-    categoriesData,
-  } = useLoaderData<typeof loader>()
+    images,
+    product
+  } = useLoaderData<typeof loader>();
 
   return (
     <MainLayout>
       <div className="flex flex-col gap-6">
-        <div>
-          <h1 className="text-3xl font-bold tracking-tight">Edit Product</h1>
-          <p className="text-muted-foreground">Update product information</p>
+        <div className="flex items-center justify-between">
+          <div>
+            <h1 className="text-3xl font-bold tracking-tight">Product Images</h1>
+            <p className="text-muted-foreground">
+              Manage images for <span className="font-medium">{product.name}</span>
+            </p>
+          </div>
+          <div className="flex gap-4">
+            <Link to={`/products/${product.productId}`}>
+              <Button variant="outline">Back to Product</Button>
+            </Link>
+            <Link to={`/products/images/new/${product.productId}`}>
+              <Button>
+                <PlusCircle className="mr-2 h-4 w-4" />
+                Add Image
+              </Button>
+            </Link>
+          </div>
         </div>
 
-        <ProductForm
-          product={product}
-          brands={brandsData}
-          categories={categoriesData}
-          selectedCategoryIds={selectedCategoryIds}
-        />
+        <ProductImagesGrid images={images} productId={product.productId} />
       </div>
     </MainLayout>
   )
@@ -38,6 +48,7 @@ export async function loader({ params }: { params: { id: string } }) {
 
   if (Number.isNaN(productId)) {
     throw new Response("Product not found", { status: 404 })
+
   }
 
   // const product = await db.query.products.findFirst({
@@ -69,32 +80,15 @@ export async function loader({ params }: { params: { id: string } }) {
     throw new Response("Product not found", { status: 404 })
   }
 
-  // Get product categories
-  // const productCategoriesData = await db
-  //   .select({
-  //     categoryId: productCategories.categoryId,
-  //   })
-  //   .from(productCategories)
-  //   .where(eq(productCategories.productId, productId))
-  const productCategoriesData = [{
-    categoryId: 1
-  }]
+  // const images = await db
+  //   .select()
+  //   .from(productImages)
+  //   .where(eq(productImages.productId, productId))
+  //   .orderBy(productImages.displayOrder)
 
-  const selectedCategoryIds = productCategoriesData.map((pc) => pc.categoryId)
-
-  // const brandsData = await db.select().from(brands)
-  // const categoriesData = await db.select().from(categories)
 
   return {
-    product,
-    selectedCategoryIds,
-    brandsData: [],
-    categoriesData: [{
-      categoryId: 1,
-      name: 'Supplement',
-      parentCategoryId: null,
-      description: 'supplement'
-    }],
+    images: [],
+    product
   }
-
 }

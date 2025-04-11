@@ -5,27 +5,30 @@ import { db } from "@workspace/db/src"
 import { brands, products } from "@workspace/db/src/schema"
 import { Link, useLoaderData } from "@remix-run/react"
 import { ProductsTable } from "~/components/products/product-table"
+import MainLayout from "~/layouts/MainLayout"
 
 export default function ProductsPage() {
   const { productList } = useLoaderData<typeof loader>()
 
   return (
-    <div className="flex flex-col gap-6">
-      <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-3xl font-bold tracking-tight">Products</h1>
-          <p className="text-muted-foreground">Manage your product catalog</p>
+    <MainLayout>
+      <div className="flex flex-col gap-6">
+        <div className="flex items-center justify-between">
+          <div>
+            <h1 className="text-3xl font-bold tracking-tight">Products</h1>
+            <p className="text-muted-foreground">Manage your product catalog</p>
+          </div>
+          <Link to="/products/new">
+            <Button>
+              <PlusCircle className="mr-2 h-4 w-4" />
+              Add Product
+            </Button>
+          </Link>
         </div>
-        <Link to="/products/new">
-          <Button>
-            <PlusCircle className="mr-2 h-4 w-4" />
-            Add Product
-          </Button>
-        </Link>
-      </div>
 
-      <ProductsTable data={productList} />
-    </div>
+        <ProductsTable data={productList} />
+      </div>
+    </MainLayout>
   )
 }
 

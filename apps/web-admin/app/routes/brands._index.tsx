@@ -32,6 +32,6 @@ export default async function BrandsPage() {
 }
 
 export async function loader() {
-  const brandList = await db.select().from(brands)
-  return { brandList }
+  // const brandList = await db.select().from(brands)
+  return { brandList: [] }
 }

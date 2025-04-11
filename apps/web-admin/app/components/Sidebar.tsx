@@ -8,7 +8,7 @@ const routes = [
   {
     label: "Dashboard",
     icon: Home,
-    href: "/",
+    href: "/dashboard",
   },
   {
     label: "Brands",
@@ -58,8 +58,8 @@ export function Sidebar() {
   return (
     <div className="flex flex-col h-full border-r bg-background w-64">
       <div className="p-6">
-        <Link to={'/'} className="flex items-center gap-2">
-          <PanelTop className="h-6 w-6" />
+        <Link to={'/'} className="flex flex-col justify-center gap-2">
+          <img src="/ServeMedLogo.avif" alt="" />
           <span className="font-bold text-xl">Admin Panel</span>
         </Link>
       </div>

@@ -3,6 +3,7 @@ import { Button } from "@workspace/ui/components/button"
 import { PlusCircle } from "lucide-react"
 import { Link, useLoaderData } from "@remix-run/react"
 import { VariantsTable } from "~/components/products/product-variants-table";
+import MainLayout from "~/layouts/MainLayout";
 
 export default function ProductVariantsPage({ params }: { params: { id: string } }) {
   const {
@@ -10,29 +11,31 @@ export default function ProductVariantsPage({ params }: { params: { id: string }
     product
   } = useLoaderData<typeof loader>();
   return (
-    <div className="flex flex-col gap-6">
-      <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-3xl font-bold tracking-tight">Product Variants</h1>
-          <p className="text-muted-foreground">
-            Manage variants for <span className="font-medium">{product.name}</span>
-          </p>
+    <MainLayout>
+      <div className="flex flex-col gap-6">
+        <div className="flex items-center justify-between">
+          <div>
+            <h1 className="text-3xl font-bold tracking-tight">Product Variants</h1>
+            <p className="text-muted-foreground">
+              Manage variants for <span className="font-medium">{product.name}</span>
+            </p>
+          </div>
+          <div className="flex gap-4">
+            <Link to={`/products/${product.productId}`}>
+              <Button variant="outline">Back to Product</Button>
+            </Link>
+            <Link to={`/products/${product.productId}/variants/new`}>
+              <Button>
+                <PlusCircle className="mr-2 h-4 w-4" />
+                Add Variant
+              </Button>
+            </Link>
+          </div>
         </div>
-        <div className="flex gap-4">
-          <Link to={`/products/${product.productId}`}>
-            <Button variant="outline">Back to Product</Button>
-          </Link>
-          <Link to={`/products/${product.productId}/variants/new`}>
-            <Button>
-              <PlusCircle className="mr-2 h-4 w-4" />
-              Add Variant
-            </Button>
-          </Link>
-        </div>
-      </div>
 
-      <VariantsTable data={variants} productId={product.productId} />
-    </div>
+        <VariantsTable data={variants} productId={product.productId} />
+      </div>
+    </MainLayout>
   )
 }
 export async function loader({ params }: { params: { id: string } }) {

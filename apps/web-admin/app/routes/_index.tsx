@@ -5,12 +5,12 @@ import type { MetaFunction } from "@remix-run/node";
 
 export const meta: MetaFunction = () => {
   return [
-    { title: "SERVEMED - ADMIN" },
+    { title: "SERVEMED - ADMIN PORTAL" },
     { name: "description", content: "Welcome to admin portal" },
   ];
 };
 
-export default async function NewProductPage() {
+export default function NewProductPage() {
   // const [brands, categories] = await Promise.all([getBrands(), getCategories()])
 
   return (

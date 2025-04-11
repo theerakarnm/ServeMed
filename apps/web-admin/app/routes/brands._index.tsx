@@ -6,7 +6,7 @@ import { brands } from "@workspace/db/src/schema"
 import { BrandsTable } from "~/components/brands/brand-table"
 import MainLayout from "~/layouts/MainLayout"
 
-export default async function BrandsPage() {
+export default function BrandsPage() {
   const { brandList } = useLoaderData<typeof loader>()
 
   return (

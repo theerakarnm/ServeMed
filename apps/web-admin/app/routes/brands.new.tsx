@@ -1,5 +1,12 @@
 import { BrandForm } from "~/components/brands/brand-form";
 import MainLayout from "~/layouts/MainLayout";
+import type { MetaFunction } from "@remix-run/node"
+
+export const meta: MetaFunction = () => {
+  return [
+    { title: "Brand Create - SERVEMED" },
+  ];
+};
 
 export default function NewBrandPage() {
   return (

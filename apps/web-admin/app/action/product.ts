@@ -128,8 +128,7 @@ export async function getProductCategories(productId?: number) {
   return await db.select().from(productCategories);
 }
 
-// biome-ignore lint/suspicious/noExplicitAny: <explanation>
-export async function createProductCategory(data: any) {
+export async function createProductCategory(data: typeof productCategories.$inferInsert) {
   await db.insert(productCategories).values(data);
 }
 

@@ -6,9 +6,8 @@ import { db } from '../../../../packages/db/src/index';
 export async function getProducts() {
   return await db.select().from(products);
 }
-
 export async function getProduct(id: number) {
-  const result = await db.select().from(products).where(eq(products.productId, id));
+  const result = await db.select().from(products).where(eq(products.productId, id)).limit(1);
   return result[0];
 }
 export async function createProduct(data: typeof products.$inferInsert) {
@@ -17,7 +16,6 @@ export async function createProduct(data: typeof products.$inferInsert) {
 export async function updateProduct(id: number, data: Partial<typeof products.$inferInsert>) {
   await db.update(products).set(data).where(eq(products.productId, id));
 }
-
 export async function deleteProduct(id: number) {
   await db.delete(products).where(eq(products.productId, id));
 }
@@ -40,7 +38,6 @@ export async function createProductVariant(data: typeof productVariants.$inferIn
 export async function updateProductVariant(id: number, data: Partial<typeof productVariants.$inferInsert>) {
   await db.update(productVariants).set(data).where(eq(productVariants.variantId, id));
 }
-
 export async function deleteProductVariant(id: number, productId: number) {
   await db.delete(productVariants).where(eq(productVariants.variantId, id));
 }

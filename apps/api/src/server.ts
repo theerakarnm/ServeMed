@@ -1,19 +1,12 @@
 import { Hono } from 'hono'
-import { db } from '@workspace/db'
-import { schema } from '@workspace/db'
-import { user as userType } from '@workspace/types'
 
-const app = new Hono()
+import * as handlers from './handlers'
 
-app.post('/user', async (c) => {
-  const body = userType.createUserSchema.parse(await c.req.json())
-  const [user] = await db.insert(schema.users).values(body).returning()
-  return c.json(user)
-})
+const app = new Hono().basePath('/api')
 
-app.get('/', (c) => c.text(JSON.stringify({ hello: 'world', userType })))
+app.route('/auth/**', handlers.auth)
 
 export default {
-  port: 3000,
+  port: process.env.PORT || 7300,
   fetch: app.fetch,
-} 
+}

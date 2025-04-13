@@ -33,7 +33,7 @@
 
     "paths": {
       "@workspace/types": ["../../packages/types/src"],
-      "@workspace/db": ["../../packages/db/src"]
+      "@workspace/db": ["../../packages/db/src"],
     }
   },
   "references": [

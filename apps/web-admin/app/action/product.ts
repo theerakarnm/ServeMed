@@ -1,54 +1,6 @@
-"use server";
-
-import { brands, categories, products, productVariants, productImages, supplementFacts, productRankings, productCategories } from "@workspace/db/src/schema";
+import { products, productVariants, productImages, supplementFacts, productRankings, productCategories } from "@workspace/db/src/schema";
 import { and, eq, or } from "drizzle-orm";
 import { db } from '../../../../packages/db/src/index';
-
-// Brand actions
-export async function getBrands() {
-  return await db.select().from(brands);
-}
-
-export async function getBrand(id: number) {
-  const result = await db.select().from(brands).where(eq(brands.brandId, id));
-  return result[0];
-}
-
-// biome-ignore lint/suspicious/noExplicitAny: <explanation>
-export async function createBrand(data: any) {
-  await db.insert(brands).values(data);
-}
-
-// biome-ignore lint/suspicious/noExplicitAny: <explanation>
-export async function updateBrand(id: number, data: any) {
-  await db.update(brands).set(data).where(eq(brands.brandId, id));
-}
-
-export async function deleteBrand(id: number) {
-  await db.delete(brands).where(eq(brands.brandId, id));
-}
-
-// Category actions
-export async function getCategories() {
-  return await db.select().from(categories);
-}
-
-export async function getCategory(id: number) {
-  const result = await db.select().from(categories).where(eq(categories.categoryId, id));
-  return result[0];
-}
-// biome-ignore lint/suspicious/noExplicitAny: <explanation>
-export async function createCategory(data: any) {
-  await db.insert(categories).values(data);
-}
-// biome-ignore lint/suspicious/noExplicitAny: <explanation>
-export async function updateCategory(id: number, data: any) {
-  await db.update(categories).set(data).where(eq(categories.categoryId, id));
-}
-
-export async function deleteCategory(id: number) {
-  await db.delete(categories).where(eq(categories.categoryId, id));
-}
 
 // Product actions
 export async function getProducts() {
@@ -59,12 +11,10 @@ export async function getProduct(id: number) {
   const result = await db.select().from(products).where(eq(products.productId, id));
   return result[0];
 }
-// biome-ignore lint/suspicious/noExplicitAny: <explanation>
-export async function createProduct(data: any) {
+export async function createProduct(data: typeof products.$inferInsert) {
   await db.insert(products).values(data);
 }
-// biome-ignore lint/suspicious/noExplicitAny: <explanation>
-export async function updateProduct(id: number, data: any) {
+export async function updateProduct(id: number, data: Partial<typeof products.$inferInsert>) {
   await db.update(products).set(data).where(eq(products.productId, id));
 }
 
@@ -84,12 +34,10 @@ export async function getProductVariant(id: number) {
   const result = await db.select().from(productVariants).where(eq(productVariants.variantId, id));
   return result[0];
 }
-// biome-ignore lint/suspicious/noExplicitAny: <explanation>
-export async function createProductVariant(data: any) {
+export async function createProductVariant(data: typeof productVariants.$inferInsert) {
   await db.insert(productVariants).values(data);
 }
-// biome-ignore lint/suspicious/noExplicitAny: <explanation>
-export async function updateProductVariant(id: number, data: any) {
+export async function updateProductVariant(id: number, data: Partial<typeof productVariants.$inferInsert>) {
   await db.update(productVariants).set(data).where(eq(productVariants.variantId, id));
 }
 
@@ -110,18 +58,16 @@ export async function getProductImage(id: number) {
   return result[0];
 }
 
-// biome-ignore lint/suspicious/noExplicitAny: <explanation>
-export async function createProductImage(data: any) {
+export async function createProductImage(data: typeof productImages.$inferInsert) {
   await db.insert(productImages).values(data);
 }
 
-// biome-ignore lint/suspicious/noExplicitAny: <explanation>
-export async function updateProductImage(id: number, data: any) {
+export async function updateProductImage(id: number, data: Partial<typeof productImages.$inferInsert>) {
   await db.update(productImages).set(data).where(eq(productImages.imageId, id));
 }
 
 export async function deleteProductImage(id: number, productId: number) {
-  await db.delete(productImages).where(eq(productImages.imageId, id));
+  await db.delete(productImages).where(and(eq(productImages.imageId, id), eq(productImages.productId, productId)));
 }
 
 // Supplement Facts actions
@@ -137,13 +83,11 @@ export async function getSupplementFact(id: number) {
   return result[0];
 }
 
-// biome-ignore lint/suspicious/noExplicitAny: <explanation>
-export async function createSupplementFact(data: any) {
+export async function createSupplementFact(data: typeof supplementFacts.$inferInsert) {
   await db.insert(supplementFacts).values(data);
 }
 
-// biome-ignore lint/suspicious/noExplicitAny: <explanation>
-export async function updateSupplementFact(id: number, data: any) {
+export async function updateSupplementFact(id: number, data: Partial<typeof supplementFacts.$inferInsert>) {
   await db.update(supplementFacts).set(data).where(eq(supplementFacts.factId, id));
 }
 
@@ -164,13 +108,11 @@ export async function getProductRanking(id: number) {
   return result[0];
 }
 
-// biome-ignore lint/suspicious/noExplicitAny: <explanation>
-export async function createProductRanking(data: any) {
+export async function createProductRanking(data: typeof productRankings.$inferInsert) {
   await db.insert(productRankings).values(data);
 }
 
-// biome-ignore lint/suspicious/noExplicitAny: <explanation>
-export async function updateProductRanking(id: number, data: any) {
+export async function updateProductRanking(id: number, data: Partial<typeof productRankings.$inferInsert>) {
   await db.update(productRankings).set(data).where(eq(productRankings.rankingId, id));
 }
 

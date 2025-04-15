@@ -1,7 +1,10 @@
 import type { MetaFunction } from "@remix-run/node";
 
-// import { getBrands, getCategories } from "@/lib/products"
-// import { createProductAction } from "../../actions/product-actions"
+import { createAuthClient } from "better-auth/react"
+const { useSession } = createAuthClient()
+import Loader from "@workspace/ui/components/Loader"
+import { useEffect } from "react";
+import { jnavigate } from "@workspace/ui/lib/utils";
 
 export const meta: MetaFunction = () => {
   return [
@@ -11,7 +14,27 @@ export const meta: MetaFunction = () => {
 };
 
 export default function NewProductPage() {
-  // const [brands, categories] = await Promise.all([getBrands(), getCategories()])
+  const {
+    data: session,
+    isPending, //loading state
+  } = useSession()
+
+  useEffect(() => {
+    if (!session && !isPending) {
+      jnavigate({
+        path: "/sign-in",
+        target: "_self",
+      })
+    }
+  }, [session, isPending])
+
+  if (isPending) {
+    return (
+      <div className="flex items-center justify-center h-screen">
+        <Loader />
+      </div>
+    )
+  }
 
   return (
     <div className="container mx-auto py-8">

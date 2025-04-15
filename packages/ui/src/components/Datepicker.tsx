@@ -1,8 +1,8 @@
-import { buttonVariants } from '~/components/ui/button';
-import type { CalendarProps } from '~/components/ui/calendar';
-import { Input } from '~/components/ui/input';
-import { Popover, PopoverContent, PopoverTrigger } from '~/components/ui/popover';
-import { cn } from '~/lib/utils';
+import { buttonVariants } from '@workspace/ui/components/button';
+import type { CalendarProps } from '@workspace/ui/components/calendar';
+import { Input } from '@workspace/ui/components/input';
+import { Popover, PopoverContent, PopoverTrigger } from '@workspace/ui/components/popover';
+import { cn } from '@workspace/ui/lib/utils';
 import { add } from 'date-fns';
 import { type Locale, th } from 'date-fns/locale';
 import { Calendar as CalendarIcon, ChevronLeft, ChevronRight } from 'lucide-react';
@@ -16,10 +16,10 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '~/components/ui/select';
-import { DayPicker, Matcher } from 'react-day-picker';
+} from '@workspace/ui/components/select';
+import { DayPicker, type Matcher } from 'react-day-picker';
 
-import * as dateUtil from '~/lib/date'
+import * as dateUtil from '@workspace/ui/lib/date'
 import { InputPure } from './inputWithOutForm';
 
 function Calendar({
@@ -29,6 +29,7 @@ function Calendar({
   yearRange = 100,
   ...props
 }: CalendarProps & { yearRange?: number }) {
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   const MONTHS = React.useMemo(() => {
     let locale: Pick<Locale, 'options' | 'localize' | 'formatLong'> = th;
     const { options, localize, formatLong } = props.locale || {};
@@ -42,6 +43,7 @@ function Calendar({
     return dateUtil.genMonths(locale);
   }, []);
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   const YEARS = React.useMemo(() => dateUtil.genYears(yearRange), []);
 
   return (
@@ -333,6 +335,7 @@ const TimePicker = React.forwardRef<TimePickerRef, TimePickerProps>(
     const periodRef = React.useRef<HTMLButtonElement>(null);
     const [period, setPeriod] = React.useState<dateUtil.Period>(date && date.getHours() >= 12 ? 'PM' : 'AM');
 
+    // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
     useImperativeHandle(
       ref,
       () => ({
@@ -513,6 +516,7 @@ const DateTimePicker = React.forwardRef<Partial<DateTimePickerRef>, DateTimePick
       };
     }
 
+    // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
     const formattedValue = React.useMemo(() => {
       return dateUtil.dayjsCustom(value).format(hourCycle === 24 ? initHourFormat.hour24 : initHourFormat.hour12)
     }, [value]);

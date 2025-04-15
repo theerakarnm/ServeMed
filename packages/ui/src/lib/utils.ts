@@ -12,7 +12,7 @@ export function jnavigate({
 }: {
   path: string,
   query?: URLSearchParams | null,
-  target: '_self' | '_blank'
+  target?: '_self' | '_blank'
 }) {
   const url = new URL(window.location.href)
   const origin = url.origin

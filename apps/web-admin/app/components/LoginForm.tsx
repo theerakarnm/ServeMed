@@ -1,4 +1,4 @@
-import { cn } from "@workspace/ui/lib/utils"
+import { cn, jnavigate } from "@workspace/ui/lib/utils"
 import { Button } from "@workspace/ui/components/button"
 import { Card, CardContent } from "@workspace/ui/components/card"
 import { InputPure as Input } from "@workspace/ui/components/inputWithOutForm"
@@ -32,7 +32,9 @@ export function LoginForm({ className, ...props }: React.ComponentProps<"div">) 
           toast('เกิดข้อผิดพลาด')
         },
         onSuccess: () => {
-          window.open('/internal', '_self')
+          jnavigate({
+            path: '/dashboard',
+          })
         }
       }
     })

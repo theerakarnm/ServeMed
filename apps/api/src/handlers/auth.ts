@@ -4,7 +4,13 @@ import { cors } from "hono/cors";
 
 const allowedOrigins = process.env.ALLOWED_ORIGINS?.split(",") || [];
 
-const handler = new Hono();
+const handler = new Hono<{
+  Variables: {
+    user: typeof auth.$Infer.Session.user | null;
+    session: typeof auth.$Infer.Session.session | null
+  }
+}>();
+
 handler.use(
   "/**", // or replace with "*" to enable cors for all routes
   cors({
@@ -28,6 +34,18 @@ handler.on(["GET"], "/auth-providers", (c) => {
 
 handler.on(["POST", "GET"], "/**", (c) => {
   return auth.handler(c.req.raw);
+});
+
+handler.get("/session", async (c) => {
+  const session = c.get("session")
+  const user = c.get("user")
+
+  if (!user) return c.body(null, 401);
+
+  return c.json({
+    session,
+    user
+  });
 });
 
 export default handler;

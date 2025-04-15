@@ -1,6 +1,7 @@
 import { db, schema } from "@workspace/db";
 import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
+import { admin, username } from "better-auth/plugins"
 
 const providers = [
   "apple",
@@ -77,7 +78,14 @@ export const auth = betterAuth({
   },
   trustedOrigins: process.env.ALLOWED_ORIGINS?.split(",") || [],
   database: drizzleAdapter(db, {
-    provider: "sqlite",
+    provider: "pg",
     schema: schema,
   }),
+  plugins: [
+    username(),
+    admin({
+      defaultRole: "regular",
+      adminRole: ["admin", "operator"],
+    }),
+  ]
 });

@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "bun run --hot src/server.ts",
     "build": "bunx tsc -b",
-    "clean": "bunx tsc --build --clean"
+    "clean": "bunx tsc --build --clean",
+    "migrate": "bunx drizzle-kit push"
   },
   "devDependencies": {
     "@types/bun": "latest",

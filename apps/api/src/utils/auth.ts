@@ -53,16 +53,16 @@ export const configuredProviders = providers.reduce<
       acc[provider].issuer = issuer;
     }
   }
-  if (provider === "microsoft") {
-    acc[provider].tenantId = "common";
-    acc[provider].requireSelectAccount = true;
-  }
-  if (provider === "tiktok") {
-    const key = process.env[`${provider.toUpperCase()}_CLIENT_KEY`];
-    if (key && key.length > 0) {
-      acc[provider].clientKey = key;
-    }
-  }
+  // if (provider === "microsoft") {
+  //   acc[provider].tenantId = "common";
+  //   acc[provider].requireSelectAccount = true;
+  // }
+  // if (provider === "tiktok") {
+  //   const key = process.env[`${provider.toUpperCase()}_CLIENT_KEY`];
+  //   if (key && key.length > 0) {
+  //     acc[provider].clientKey = key;
+  //   }
+  // }
   return acc;
 }, {});
 

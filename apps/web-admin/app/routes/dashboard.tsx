@@ -2,9 +2,10 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@work
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@workspace/ui/components/tabs"
 import MainLayout from "~/layouts/MainLayout"
 import { Package, Tag, Grid3X3, Layers, Link } from "lucide-react"
-import { authClient } from "~/libs/auth-client"
-import { createAuthClient } from "better-auth/react"
-const { useSession } = createAuthClient()
+import { argsSession } from "~/config"
+import { createAuthClient } from 'better-auth/react';
+
+const { useSession } = createAuthClient(argsSession)
 
 export default function Dashboard() {
   const {
@@ -14,11 +15,7 @@ export default function Dashboard() {
     refetch //refetch the session
   } = useSession()
 
-  console.log({
-    session,
-    isPending,
-    error,
-  });
+
 
 
   return (

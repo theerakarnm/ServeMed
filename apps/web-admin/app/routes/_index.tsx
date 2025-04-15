@@ -1,10 +1,12 @@
 import type { MetaFunction } from "@remix-run/node";
 
-import { createAuthClient } from "better-auth/react"
-const { useSession } = createAuthClient()
 import Loader from "@workspace/ui/components/Loader"
 import { useEffect } from "react";
 import { jnavigate } from "@workspace/ui/lib/utils";
+import { createAuthClient } from 'better-auth/react';
+import { argsSession } from "~/config";
+
+const { useSession } = createAuthClient(argsSession)
 
 export const meta: MetaFunction = () => {
   return [

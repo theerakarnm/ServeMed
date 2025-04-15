@@ -1,9 +1,10 @@
 import { Sidebar } from '~/components/Sidebar'
-import { createAuthClient } from "better-auth/react"
-const { useSession } = createAuthClient()
 import Loader from "@workspace/ui/components/Loader"
 import { useEffect } from "react";
 import { jnavigate } from "@workspace/ui/lib/utils";
+import { argsSession } from "~/config";
+import { createAuthClient } from 'better-auth/react';
+
 
 type Props = {
   children: React.ReactNode
@@ -11,19 +12,12 @@ type Props = {
 }
 
 const MainLayout = (props: Props) => {
+  const { useSession } = createAuthClient(argsSession)
 
   const {
     data: session,
     isPending, //loading state
   } = useSession()
-
-  if (isPending) {
-    return (
-      <div className="flex items-center justify-center h-screen">
-        <Loader />
-      </div>
-    )
-  }
 
   useEffect(() => {
     if (!session && !isPending) {
@@ -33,6 +27,14 @@ const MainLayout = (props: Props) => {
       })
     }
   }, [session, isPending])
+
+  if (isPending) {
+    return (
+      <div className="flex items-center justify-center h-screen">
+        <Loader />
+      </div>
+    )
+  }
 
   return (
     <div className="flex min-h-screen">

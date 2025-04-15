@@ -1,10 +1,18 @@
-import { createAuthClient } from "better-auth/react" // make sure to import from better-auth/react
-import { adminClient, usernameClient, organizationClient } from "better-auth/client/plugins"
+import { createAuthClient } from "better-auth/react"
+import { usernameClient } from "better-auth/client/plugins"
+
+// Get the API URL from environment variables
+const AUTH_API_URL = window.ENV?.PUBLIC_AUTH_API_URL ||
+  window.ENV?.env?.PUBLIC_AUTH_API_URL ||
+  "http://localhost:7300" // Fallback URL for development
 
 export const authClient = createAuthClient({
-  baseURL: window.ENV?.PUBLIC_AUTH_API_URL || window.ENV.env?.PUBLIC_AUTH_API_URL,
+  baseURL: AUTH_API_URL,
   basePath: "/api/auth",
   plugins: [
     usernameClient()
-  ]
+  ],
+  fetchOptions: {
+    credentials: 'include',
+  },
 })

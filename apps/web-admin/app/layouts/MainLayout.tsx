@@ -2,9 +2,8 @@ import { Sidebar } from '~/components/Sidebar'
 import Loader from "@workspace/ui/components/Loader"
 import { useEffect } from "react";
 import { jnavigate } from "@workspace/ui/lib/utils";
-import { argsSession } from "~/config";
 import { createAuthClient } from 'better-auth/react';
-
+const { useSession } = createAuthClient()
 
 type Props = {
   children: React.ReactNode
@@ -12,7 +11,6 @@ type Props = {
 }
 
 const MainLayout = (props: Props) => {
-  const { useSession } = createAuthClient(argsSession)
 
   const {
     data: session,

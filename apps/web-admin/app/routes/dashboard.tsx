@@ -2,10 +2,9 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@work
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@workspace/ui/components/tabs"
 import MainLayout from "~/layouts/MainLayout"
 import { Package, Tag, Grid3X3, Layers, Link } from "lucide-react"
-import { argsSession } from "~/config"
 import { createAuthClient } from 'better-auth/react';
 
-const { useSession } = createAuthClient(argsSession)
+const { useSession } = createAuthClient()
 
 export default function Dashboard() {
   const {

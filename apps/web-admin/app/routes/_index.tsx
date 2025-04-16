@@ -4,9 +4,8 @@ import Loader from "@workspace/ui/components/Loader"
 import { useEffect } from "react";
 import { jnavigate } from "@workspace/ui/lib/utils";
 import { createAuthClient } from 'better-auth/react';
-import { argsSession } from "~/config";
 
-const { useSession } = createAuthClient(argsSession)
+const { useSession } = createAuthClient()
 
 export const meta: MetaFunction = () => {
   return [
@@ -28,6 +27,15 @@ export default function NewProductPage() {
         target: "_self",
       })
     }
+
+    if (session?.user && !isPending) {
+      jnavigate({
+        path: "/dashboard",
+        target: "_self",
+      })
+    }
+
+
   }, [session, isPending])
 
   if (isPending) {
@@ -39,10 +47,8 @@ export default function NewProductPage() {
   }
 
   return (
-    <div className="container mx-auto py-8">
-      <h1 className="text-3xl font-bold mb-6">Add New Product</h1>
-
-
+    <div className="flex items-center justify-center h-screen">
+      <Loader />
     </div>
   )
 }

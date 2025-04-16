@@ -5,6 +5,7 @@ import { db } from "@workspace/db/src"
 import { brands } from "@workspace/db/src/schema"
 import { BrandsTable } from "~/components/brands/brand-table"
 import MainLayout from "~/layouts/MainLayout"
+import { getBrand, getBrands } from "~/action/brand"
 
 export default function BrandsPage() {
   const { brandList } = useLoaderData<typeof loader>()
@@ -32,6 +33,8 @@ export default function BrandsPage() {
 }
 
 export async function loader() {
-  // const brandList = await db.select().from(brands)
-  return { brandList: [] }
+  const brandList = await getBrands()
+  return {
+    brandList
+  }
 }

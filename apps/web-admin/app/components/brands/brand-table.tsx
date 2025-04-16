@@ -24,7 +24,7 @@ import {
 import { Input } from "@workspace/ui/components/input"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@workspace/ui/components/table"
 import { toast } from "sonner"
-import { Link } from "@remix-run/react"
+import { Link, useSearchParams } from "@remix-run/react"
 
 interface Brand {
   brandId: number
@@ -36,6 +36,7 @@ interface Brand {
 export function BrandsTable({ data }: { data: Brand[] }) {
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
+  const [searchParams, setSearchParams] = useSearchParams();
 
   const columns: ColumnDef<Brand>[] = [
     {

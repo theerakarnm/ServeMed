@@ -1,10 +1,28 @@
 import { brands } from "@workspace/db/src/schema";
-import { eq } from "drizzle-orm";
+import { and, desc, eq, gt, isNull, like } from "drizzle-orm";
 import { db } from '../../../../packages/db/src/index';
+import { PAGE_SIZE } from "~/config/pagination";
 
 // Brand actions
-export async function getBrands() {
-  return await db.select().from(brands);
+export async function getBrands({
+  context,
+  cursor
+}: {
+  context?: string
+  cursor?: number
+} = {}) {
+  const brandResultList = await db.select().from(brands)
+    .where(
+      and(
+        context ? like(brands.name, context) : undefined,
+        cursor ? gt(brands.brandId, cursor) : undefined,
+        isNull(brands.deletedAt),
+      )
+    )
+    .orderBy(desc(brands.brandId))
+  // .limit(PAGE_SIZE)
+
+  return brandResultList
 }
 
 export async function getBrand(id: number) {

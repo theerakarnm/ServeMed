@@ -87,6 +87,8 @@ export const brands = pgTable("brands", {
   name: varchar("name", { length: 255 }).notNull().unique(),
   logoUrl: varchar("logo_url", { length: 512 }),
   description: text("description"),
+
+  ...commonFields,
 });
 
 export const categories = pgTable(
@@ -96,6 +98,8 @@ export const categories = pgTable(
     name: varchar("name", { length: 255 }).notNull(),
     parentCategoryId: integer("parent_category_id"),
     description: text("description"),
+
+    ...commonFields,
   },
   (table) => ([{
     parentCategoryIdx: index("parent_category_idx").on(table.parentCategoryId),

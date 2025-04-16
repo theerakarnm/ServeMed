@@ -25,16 +25,16 @@ const routes = [
     icon: Package,
     href: "/products",
   },
-  {
-    label: "Product Variants",
-    icon: Layers,
-    href: "/variants",
-  },
-  {
-    label: "Product Images",
-    icon: ImageIcon,
-    href: "/images",
-  },
+  // {
+  //   label: "Product Variants",
+  //   icon: Layers,
+  //   href: "/variants",
+  // },
+  // {
+  //   label: "Product Images",
+  //   icon: ImageIcon,
+  //   href: "/images",
+  // },
   {
     label: "Supplement Facts",
     icon: Box,

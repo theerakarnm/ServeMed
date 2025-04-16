@@ -1,7 +1,7 @@
 import { type Brand, BrandForm } from "~/components/brands/brand-form";
 import MainLayout from "~/layouts/MainLayout";
 import type { ActionFunctionArgs, MetaFunction } from "@remix-run/node"
-import { createBrand, updateBrand } from "~/action/brand";
+import { createBrand, createManyBrand, updateBrand } from "~/action/brand";
 import { HTTP_STATUS } from "~/config/http";
 
 export const meta: MetaFunction = () => {
@@ -33,16 +33,23 @@ export async function action({ request }: ActionFunctionArgs) {
   }
 
   try {
-    const parsedData = JSON.parse(data.toString()) as Brand
+    const parsedData = JSON.parse(data.toString()) as {
+      brands: Brand[]
+      brandId?: number
+    }
 
     if (parsedData.brandId) {
-      await updateBrand(parsedData.brandId, parsedData)
+      if (!parsedData.brands[0]) {
+        throw new Response("Invalid data", { status: HTTP_STATUS.BAD_REQUEST })
+      }
+      await updateBrand(parsedData.brandId, parsedData.brands[0])
 
       return {
         status: HTTP_STATUS.OK
       }
     }
-    await createBrand(parsedData)
+
+    await createManyBrand(parsedData.brands)
 
     return {
       status: HTTP_STATUS.CREATED

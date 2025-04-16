@@ -34,6 +34,10 @@ export async function createBrand(data: typeof brands.$inferInsert) {
   await db.insert(brands).values(data);
 }
 
+export async function createManyBrand(data: typeof brands.$inferInsert[]) {
+  await db.insert(brands).values(data);
+}
+
 export async function updateBrand(id: number, data: Partial<typeof brands.$inferInsert>) {
   await db.update(brands).set(data).where(eq(brands.brandId, id));
 }

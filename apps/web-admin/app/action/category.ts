@@ -1,10 +1,23 @@
 import { categories } from "@workspace/db/src/schema";
-import { and, eq, or } from "drizzle-orm";
+import { and, eq, gt, isNull, like, or } from "drizzle-orm";
 import { db } from '../../../../packages/db/src/index';
 
 // Category actions
-export async function getCategories() {
-  return await db.select().from(categories);
+export async function getCategories({
+  context,
+  cursor
+}: {
+  context?: string
+  cursor?: number
+} = {}) {
+  return await db.select().from(categories)
+    .where(
+      and(
+        context ? like(categories.name, context) : undefined,
+        cursor ? gt(categories.categoryId, cursor) : undefined,
+        isNull(categories.deletedAt),
+      )
+    );
 }
 
 export async function getCategory(id: number) {

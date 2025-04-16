@@ -3,6 +3,7 @@ import { PlusCircle } from "lucide-react"
 import { Link, useLoaderData } from "@remix-run/react"
 import { CategoriesTable } from "~/components/categories/category-table"
 import MainLayout from "~/layouts/MainLayout"
+import { getCategories } from "~/action/category"
 
 export default function CategoriesPage() {
   const { categoryList } = useLoaderData<typeof loader>()
@@ -30,6 +31,6 @@ export default function CategoriesPage() {
 }
 
 export async function loader() {
-  // const data = await db.select().from(categories)
-  return { categoryList: [] }
+  const categoryList = await getCategories()
+  return { categoryList }
 }

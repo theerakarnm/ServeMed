@@ -1,6 +1,8 @@
-import { BrandForm } from "~/components/brands/brand-form";
+import { type Brand, BrandForm } from "~/components/brands/brand-form";
 import MainLayout from "~/layouts/MainLayout";
-import type { MetaFunction } from "@remix-run/node"
+import type { ActionFunctionArgs, MetaFunction } from "@remix-run/node"
+import { createBrand, updateBrand } from "~/action/brand";
+import { HTTP_STATUS } from "~/config/http";
 
 export const meta: MetaFunction = () => {
   return [
@@ -20,4 +22,32 @@ export default function NewBrandPage() {
       </div>
     </MainLayout>
   )
+}
+
+export async function action({ request }: ActionFunctionArgs) {
+  const formData = await request.formData()
+  const data = formData.get("data")
+
+  if (!data) {
+    throw new Response("Invalid data", { status: HTTP_STATUS.BAD_REQUEST })
+  }
+
+  try {
+    const parsedData = JSON.parse(data.toString()) as Brand
+
+    if (parsedData.brandId) {
+      await updateBrand(parsedData.brandId, parsedData)
+
+      return {
+        status: HTTP_STATUS.OK
+      }
+    }
+    await createBrand(parsedData)
+
+    return {
+      status: HTTP_STATUS.CREATED
+    }
+  } catch (error) {
+    throw new Response("Invalid JSON data", { status: HTTP_STATUS.BAD_REQUEST })
+  }
 }

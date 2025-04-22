@@ -16,6 +16,24 @@ export async function getTopCategories() {
   }
 }
 
+// Get top categories (most popular or featured)
+export async function getProductCategories(productId: number) {
+  try {
+    // In a real app, you might query based on product count or manually featured categories
+    return [
+      { categoryId: 1, name: "Vitamins", productCount: 120 },
+      { categoryId: 2, name: "Minerals", productCount: 85 },
+      { categoryId: 3, name: "Probiotics", productCount: 64 },
+      { categoryId: 4, name: "Omega-3", productCount: 42 },
+      { categoryId: 5, name: "Protein", productCount: 78 },
+      { categoryId: 6, name: "Herbs", productCount: 93 },
+    ]
+  } catch (error) {
+    console.error("Error fetching top categories:", error)
+    return []
+  }
+}
+
 // Get featured products
 export async function getFeaturedProducts() {
   try {

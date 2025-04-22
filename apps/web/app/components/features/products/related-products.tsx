@@ -1,13 +1,12 @@
 import ProductCard from "~/components/product-card"
-import { getRelatedProducts } from "~/data/product"
+import type { getRelatedProducts } from "~/data/product"
 
 interface RelatedProductsProps {
-  productId: number
+  productId: number,
+  products: Awaited<ReturnType<typeof getRelatedProducts>>
 }
 
-export default async function RelatedProducts({ productId }: RelatedProductsProps) {
-  const products = await getRelatedProducts(productId)
-
+export default function RelatedProducts({ productId, products }: RelatedProductsProps) {
   if (products.length === 0) {
     return <div className="text-center py-8 text-muted-foreground">No related products found.</div>
   }

@@ -1,14 +1,13 @@
 import { Link } from "@remix-run/react"
 import { Badge } from "@workspace/ui/components/badge"
-import { getProductCategories } from "~/data/product"
+import type { getProductCategories } from "~/data/product"
 
 interface RelatedCategoriesProps {
-  productId: number
+  productId: number,
+  categories: Awaited<ReturnType<typeof getProductCategories>>
 }
 
-export default async function RelatedCategories({ productId }: RelatedCategoriesProps) {
-  const categories = await getProductCategories(productId)
-
+export default function RelatedCategories({ productId, categories }: RelatedCategoriesProps) {
   if (categories.length === 0) {
     return <div className="text-center py-4 text-muted-foreground">No categories found.</div>
   }

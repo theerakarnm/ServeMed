@@ -277,3 +277,25 @@ export async function getNewArrivals() {
     return []
   }
 }
+
+// Get product by ID
+export async function getProductById(productId: number) {
+  try {
+    // In a real app: return db.select().from(products).where(eq(products.productId, productId)).limit(1);
+    return {
+      productId,
+      name: "Vitamin D3 + K2 Complex",
+      brandId: 1,
+      brandName: "NutriPure",
+      overallRating: 4.8,
+      totalReviews: 128,
+      price: 24.99,
+      currency: "USD",
+      isuraVerified: true,
+      detailedDescription: "Vitamin D3 and K2 work synergistically to support bone health and immune function.",
+    }
+  } catch (error) {
+    console.error("Error fetching product:", error)
+    return null
+  }
+}

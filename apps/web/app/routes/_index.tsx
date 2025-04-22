@@ -1,5 +1,4 @@
 import { Suspense } from "react"
-import Link from "next/link"
 import { ArrowRight, ShoppingBag, Star, TrendingUp } from "lucide-react"
 import { Card, CardContent, CardFooter, CardHeader } from "@workspace/ui/components/card"
 import { Skeleton } from "@workspace/ui/components/skeleton"
@@ -9,13 +8,17 @@ import {
   getFeaturedBrands,
   getTopRankedProducts,
   getNewArrivals,
-} from "@/lib/data"
-import HeroSection from "@/components/hero-section"
-import ProductCard from "@/components/product-card"
-import CategoryCard from "@/components/category-card"
-import BrandCard from "@/components/brand-card"
+} from "~/data/product"
+import HeroSection from "~/components/hero-section"
+import ProductCard from "~/components/product-card"
+import CategoryCard from "~/components/category-card"
+import BrandCard from "~/components/brand-card"
+import { Link, useLoaderData } from "@remix-run/react"
+import type { LoaderFunctionArgs } from "@remix-run/node"
+import { categories, products } from '../../../../packages/db/src/schema';
 
 export default async function HomePage() {
+  const data = useLoaderData<typeof loader>()
   return (
     <div className="flex flex-col min-h-screen">
       <main className="flex-1">
@@ -29,14 +32,12 @@ export default async function HomePage() {
                 <h2 className="text-3xl font-bold tracking-tight">Shop by Category</h2>
                 <p className="text-muted-foreground mt-1">Browse our wide selection of health supplements</p>
               </div>
-              <Link href="/categories" className="flex items-center text-primary hover:underline">
+              <Link to="/categories" className="flex items-center text-primary hover:underline">
                 View all categories <ArrowRight className="ml-1 h-4 w-4" />
               </Link>
             </div>
 
-            <Suspense fallback={<CategorySkeleton />}>
-              <TopCategories />
-            </Suspense>
+            <TopCategories categories={data.topCategories} />
           </div>
         </section>
 
@@ -48,13 +49,13 @@ export default async function HomePage() {
                 <h2 className="text-3xl font-bold tracking-tight">Featured Products</h2>
                 <p className="text-muted-foreground mt-1">Our most popular health supplements</p>
               </div>
-              <Link href="/products" className="flex items-center text-primary hover:underline">
+              <Link to="/products" className="flex items-center text-primary hover:underline">
                 View all products <ArrowRight className="ml-1 h-4 w-4" />
               </Link>
             </div>
 
             <Suspense fallback={<ProductSkeleton />}>
-              <FeaturedProducts />
+              <FeaturedProducts products={data.featuredProducts} />
             </Suspense>
           </div>
         </section>
@@ -67,13 +68,13 @@ export default async function HomePage() {
                 <h2 className="text-3xl font-bold tracking-tight">Top Brands</h2>
                 <p className="text-muted-foreground mt-1">Trusted manufacturers of quality supplements</p>
               </div>
-              <Link href="/brands" className="flex items-center text-primary hover:underline">
+              <Link to="/brands" className="flex items-center text-primary hover:underline">
                 View all brands <ArrowRight className="ml-1 h-4 w-4" />
               </Link>
             </div>
 
             <Suspense fallback={<BrandSkeleton />}>
-              <FeaturedBrands />
+              <FeaturedBrands brands={data.featuredBrands} />
             </Suspense>
           </div>
         </section>
@@ -86,13 +87,13 @@ export default async function HomePage() {
                 <h2 className="text-3xl font-bold tracking-tight">Top Ranked Products</h2>
                 <p className="text-muted-foreground mt-1">Highest rated in their categories</p>
               </div>
-              <Link href="/rankings" className="flex items-center text-primary hover:underline">
+              <Link to="/rankings" className="flex items-center text-primary hover:underline">
                 View all rankings <ArrowRight className="ml-1 h-4 w-4" />
               </Link>
             </div>
 
             <Suspense fallback={<ProductSkeleton />}>
-              <TopRankedProducts />
+              <TopRankedProducts products={data.topRankedProducts} />
             </Suspense>
           </div>
         </section>
@@ -105,13 +106,13 @@ export default async function HomePage() {
                 <h2 className="text-3xl font-bold tracking-tight">New Arrivals</h2>
                 <p className="text-muted-foreground mt-1">The latest additions to our catalog</p>
               </div>
-              <Link href="/new-arrivals" className="flex items-center text-primary hover:underline">
+              <Link to="/new-arrivals" className="flex items-center text-primary hover:underline">
                 View all new arrivals <ArrowRight className="ml-1 h-4 w-4" />
               </Link>
             </div>
 
             <Suspense fallback={<ProductSkeleton />}>
-              <NewArrivals />
+              <NewArrivals products={data.newArrivals} />
             </Suspense>
           </div>
         </section>
@@ -151,9 +152,31 @@ export default async function HomePage() {
   )
 }
 
-async function TopCategories() {
-  const categories = await getTopCategories()
+export async function loader({ request }: LoaderFunctionArgs) {
+  const [
+    featuredProducts,
+    topCategories,
+    featuredBrands,
+    topRankedProducts,
+    newArrivals,
+  ] = await Promise.all([
+    getFeaturedProducts(),
+    getTopCategories(),
+    getFeaturedBrands(),
+    getTopRankedProducts(),
+    getNewArrivals(),
+  ])
 
+  return {
+    featuredProducts,
+    topCategories,
+    featuredBrands,
+    topRankedProducts,
+    newArrivals,
+  };
+}
+
+function TopCategories({ categories }: { categories: Awaited<ReturnType<typeof getTopCategories>> }) {
   return (
     <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
       {categories.map((category) => (
@@ -163,9 +186,7 @@ async function TopCategories() {
   )
 }
 
-async function FeaturedProducts() {
-  const products = await getFeaturedProducts()
-
+function FeaturedProducts({ products }: { products: Awaited<ReturnType<typeof getFeaturedProducts>> }) {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
       {products.map((product) => (
@@ -175,9 +196,9 @@ async function FeaturedProducts() {
   )
 }
 
-async function FeaturedBrands() {
-  const brands = await getFeaturedBrands()
-
+function FeaturedBrands(
+  { brands }: { brands: Awaited<ReturnType<typeof getFeaturedBrands>> }
+) {
   return (
     <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6">
       {brands.map((brand) => (
@@ -187,9 +208,9 @@ async function FeaturedBrands() {
   )
 }
 
-async function TopRankedProducts() {
-  const products = await getTopRankedProducts()
-
+function TopRankedProducts(
+  { products }: { products: Awaited<ReturnType<typeof getTopRankedProducts>> }
+) {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
       {products.map((product) => (
@@ -199,9 +220,9 @@ async function TopRankedProducts() {
   )
 }
 
-async function NewArrivals() {
-  const products = await getNewArrivals()
-
+function NewArrivals(
+  { products }: { products: Awaited<ReturnType<typeof getNewArrivals>> }
+) {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
       {products.map((product) => (
@@ -211,12 +232,15 @@ async function NewArrivals() {
   )
 }
 
-function CategorySkeleton() {
+function CategorySkeleton(
+
+) {
   return (
     <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
       {Array(6)
         .fill(0)
         .map((_, i) => (
+          // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
           <div key={i} className="flex flex-col items-center">
             <Skeleton className="h-24 w-24 rounded-full mb-3" />
             <Skeleton className="h-4 w-24 mb-1" />
@@ -232,6 +256,7 @@ function ProductSkeleton() {
       {Array(4)
         .fill(0)
         .map((_, i) => (
+          // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
           <Card key={i} className="overflow-hidden">
             <Skeleton className="h-48 w-full" />
             <CardHeader>
@@ -257,6 +282,7 @@ function BrandSkeleton() {
       {Array(6)
         .fill(0)
         .map((_, i) => (
+          // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
           <Card key={i} className="overflow-hidden">
             <Skeleton className="h-24 w-full" />
             <CardContent className="p-4">

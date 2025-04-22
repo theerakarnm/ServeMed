@@ -91,6 +91,63 @@ export async function getFeaturedProducts() {
   }
 }
 
+export async function getRelatedProducts(productId: number) {
+  try {
+    // In a real app, you would query your database
+    // For example: return db.select().from(products).orderBy(desc(products.totalReviews)).limit(4);
+    return [
+      {
+        productId: 1,
+        name: "Vitamin D3 + K2 Complex",
+        brandId: 1,
+        brandName: "NutriPure",
+        overallRating: 4.8,
+        totalReviews: 128,
+        price: 24.99,
+        currency: "USD",
+        isuraVerified: true,
+      },
+      {
+        productId: 2,
+        name: "Omega-3 Fish Oil 1000mg",
+        brandId: 2,
+        brandName: "VitalLife",
+        overallRating: 4.6,
+        totalReviews: 95,
+        price: 19.99,
+        currency: "USD",
+        isuraVerified: true,
+      },
+      {
+        productId: 3,
+        name: "Probiotic 50 Billion CFU",
+        brandId: 3,
+        brandName: "BioBalance",
+        overallRating: 4.7,
+        totalReviews: 112,
+        price: 29.99,
+        currency: "USD",
+        isuraVerified: false,
+      },
+      {
+        productId: 4,
+        name: "Magnesium Glycinate",
+        brandId: 1,
+        brandName: "NutriPure",
+        overallRating: 4.9,
+        totalReviews: 87,
+        price: 18.99,
+        currency: "USD",
+        isuraVerified: true,
+      },
+    ]
+  } catch (error) {
+    console.error("Error fetching featured products:", error)
+    return []
+  }
+}
+
+
 // Get featured brands
 export async function getFeaturedBrands() {
   try {

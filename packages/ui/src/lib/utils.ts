@@ -18,3 +18,4 @@ export function jnavigate({
   const origin = url.origin
   window.open(`${origin}${path}?${query ? query.toString() : ''}`, target)
 }
+

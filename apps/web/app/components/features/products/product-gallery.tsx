@@ -3,7 +3,7 @@ import { ChevronLeft, ChevronRight, Expand } from 'lucide-react'
 import { Button } from "@workspace/ui/components/button"
 import { Dialog, DialogContent, DialogTrigger } from "@workspace/ui/components/dialog"
 import { cn } from "@workspace/ui/lib/utils"
-import { useProductImages } from "@/hooks/use-product-images"
+import { useProductImages } from "~/hooks/use-product-images"
 
 interface ProductGalleryProps {
   productId: number
@@ -49,25 +49,21 @@ export default function ProductGallery({ productId }: ProductGalleryProps) {
           </DialogTrigger>
           <DialogContent className="max-w-4xl">
             <div className="relative aspect-square">
-              <Image
+              <img
                 src={images[currentImage].imageUrl || "/placeholder.svg?height=800&width=800"}
                 alt={images[currentImage].altText || "Product image"}
-                fill
                 className="object-contain"
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                priority
               />
             </div>
           </DialogContent>
         </Dialog>
 
-        <Image
+        <img
           src={images[currentImage].imageUrl || "/placeholder.svg?height=600&width=600"}
           alt={images[currentImage].altText || "Product image"}
-          fill
           className="object-contain"
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-          priority
         />
 
         {images.length > 1 && (
@@ -98,21 +94,22 @@ export default function ProductGallery({ productId }: ProductGalleryProps) {
       {images.length > 1 && (
         <div className="flex space-x-2 overflow-x-auto pb-2">
           {images.map((image, index) => (
-            <button
+            <Button
               key={image.imageId}
               className={cn(
                 "relative w-20 h-20 rounded-md overflow-hidden border-2",
                 currentImage === index ? "border-primary" : "border-muted"
               )}
               onClick={() => setCurrentImage(index)}
+
             >
-              <Image
+              <img
                 src={image.imageUrl || "/placeholder.svg?height=80&width=80"}
                 alt={image.altText || `Product thumbnail ${index + 1}`}
-                fill
+
                 className="object-cover"
               />
-            </button>
+            </Button>
           ))}
         </div>
       )}

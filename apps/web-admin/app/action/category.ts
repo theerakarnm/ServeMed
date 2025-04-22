@@ -31,6 +31,10 @@ export async function updateCategory(id: number, data: Partial<typeof categories
   await db.update(categories).set(data).where(eq(categories.categoryId, id));
 }
 
+export async function createCategories(data: typeof categories.$inferInsert[]) {
+  await db.insert(categories).values(data);
+}
+
 export async function deleteCategory(id: number) {
   await db.delete(categories).where(eq(categories.categoryId, id));
 }

@@ -18,7 +18,7 @@ import { Calendar } from "@workspace/ui/components/calendar"
 import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from "@workspace/ui/components/command"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@workspace/ui/components/tabs"
 import { toast } from 'sonner'
-import { useLocation } from "@remix-run/react"
+import { useLocation, useSubmit } from "@remix-run/react"
 import { cn, jnavigate } from "@workspace/ui/lib/utils"
 
 const productSchema = z.object({
@@ -40,7 +40,7 @@ const productSchema = z.object({
   categoryIds: z.array(z.number()).min(1, "At least one category is required"),
 })
 
-type ProductFormValues = z.infer<typeof productSchema>
+export type ProductFormValues = z.infer<typeof productSchema>
 
 interface Product {
   productId: number
@@ -84,6 +84,7 @@ interface ProductFormProps {
 export function ProductForm({ product, brands, categories, selectedCategoryIds = [] }: ProductFormProps) {
   const [isLoading, setIsLoading] = useState(false)
   const router = useLocation()
+  const submit = useSubmit()
 
   const form = useForm<ProductFormValues>({
     resolver: zodResolver(productSchema),
@@ -109,29 +110,19 @@ export function ProductForm({ product, brands, categories, selectedCategoryIds =
     setIsLoading(true)
 
     try {
-      const response = await fetch("/api/products", {
+
+      const formData = new FormData()
+      formData.append('data', JSON.stringify(data))
+
+      submit(formData, {
+        action: product ? `/products/${product.productId}` : "/products/new",
         method: product ? "PUT" : "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          ...data,
-          productId: product?.productId,
-        }),
       })
 
-      if (!response.ok) {
-        throw new Error("Failed to save product")
-      }
-
-      toast(product
-        ? "Your product has been updated successfully."
-        : "Your product has been created successfully.")
-
-      jnavigate({
-        path: '/products',
-        target: '_self'
-      })
+      // jnavigate({
+      //   path: '/products',
+      //   target: '_self'
+      // })
     } catch (error) {
       toast('Something went wrong. Please try again.')
     } finally {

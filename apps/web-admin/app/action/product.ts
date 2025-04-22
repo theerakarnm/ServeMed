@@ -11,7 +11,9 @@ export async function getProduct(id: number) {
   return result[0];
 }
 export async function createProduct(data: typeof products.$inferInsert) {
-  await db.insert(products).values(data);
+  return await db.insert(products).values(data).returning({
+    productId: products.productId,
+  });
 }
 export async function updateProduct(id: number, data: Partial<typeof products.$inferInsert>) {
   await db.update(products).set(data).where(eq(products.productId, id));
@@ -125,7 +127,7 @@ export async function getProductCategories(productId?: number) {
   return await db.select().from(productCategories);
 }
 
-export async function createProductCategory(data: typeof productCategories.$inferInsert) {
+export async function createProductCategory(data: typeof productCategories.$inferInsert[]) {
   await db.insert(productCategories).values(data);
 }
 

@@ -6,6 +6,7 @@ import { brands, products } from "@workspace/db/src/schema"
 import { Link, useLoaderData } from "@remix-run/react"
 import { ProductsTable } from "~/components/products/product-table"
 import MainLayout from "~/layouts/MainLayout"
+import { getProduct, getProducts } from "~/action/product"
 
 export default function ProductsPage() {
   const { productList } = useLoaderData<typeof loader>()
@@ -49,7 +50,7 @@ export async function loader() {
   //   .from(products)
   //   .leftJoin(brands, eq(products.brandId, brands.brandId))
 
-
-  return { productList: [] }
+  const products = await getProducts()
+  return { productList: products }
 }
 

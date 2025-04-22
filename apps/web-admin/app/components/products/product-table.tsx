@@ -34,7 +34,7 @@ interface Product {
   overallRating: number | null
   totalReviews: number
   isuraVerified: boolean
-  dateFirstAvailable: Date | null
+  dateFirstAvailable: Date | string | null
 }
 
 export function ProductsTable({ data }: { data: Product[] }) {

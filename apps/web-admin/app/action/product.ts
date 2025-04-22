@@ -1,10 +1,31 @@
-import { products, productVariants, productImages, supplementFacts, productRankings, productCategories } from "@workspace/db/src/schema";
-import { and, eq, or } from "drizzle-orm";
+import { products, productVariants, productImages, supplementFacts, productRankings, productCategories, brands } from "@workspace/db/src/schema";
+import { and, eq, or, sql } from "drizzle-orm";
 import { db } from '../../../../packages/db/src/index';
 
 // Product actions
 export async function getProducts() {
-  return await db.select().from(products);
+  return await db.select({
+    productId: products.productId,
+    brandId: products.brandId,
+    name: products.name,
+    baseDescription: products.baseDescription,
+    overallRating: sql<number>`ROUND(${products.overallRating}, 1)`,
+    totalReviews: products.totalReviews,
+    totalQuestions: products.totalQuestions,
+    dateFirstAvailable: products.dateFirstAvailable,
+    manufacturerWebsiteUrl: products.manufacturerWebsiteUrl,
+    isuraVerified: products.isuraVerified,
+    nonGmoDocumentation: products.nonGmoDocumentation,
+    massSpecLabTested: products.massSpecLabTested,
+    detailedDescription: products.detailedDescription,
+    suggestedUse: products.suggestedUse,
+    otherIngredients: products.otherIngredients,
+    warnings: products.warnings,
+    disclaimer: products.disclaimer,
+    brandName: brands.name,
+  })
+    .from(products)
+    .innerJoin(brands, eq(products.brandId, brands.brandId));
 }
 export async function getProduct(id: number) {
   const result = await db.select().from(products).where(eq(products.productId, id)).limit(1);

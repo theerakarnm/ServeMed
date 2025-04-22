@@ -119,10 +119,10 @@ export function ProductForm({ product, brands, categories, selectedCategoryIds =
         method: product ? "PUT" : "POST",
       })
 
-      // jnavigate({
-      //   path: '/products',
-      //   target: '_self'
-      // })
+      jnavigate({
+        path: '/products',
+        target: '_self'
+      })
     } catch (error) {
       toast('Something went wrong. Please try again.')
     } finally {

@@ -1,6 +1,7 @@
 import { Hono } from 'hono'
 import * as handlers from './handlers'
 import { cors } from 'hono/cors';
+import { prettyJSON } from 'hono/pretty-json';
 
 const app = new Hono().basePath('/api')
 
@@ -15,6 +16,7 @@ app.use('/*', cors({
   maxAge: 600,
   credentials: true
 }))
+app.use("*", prettyJSON());
 
 app.route('/auth', handlers.auth)
 

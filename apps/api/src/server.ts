@@ -20,6 +20,7 @@ app.use("*", prettyJSON());
 
 app.route('/auth', handlers.auth)
 app.route('/products', handlers.productsHandler)
+app.route('/compose', handlers.compose)
 
 export default {
   port: process.env.PORT || 7300,

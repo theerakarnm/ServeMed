@@ -1,7 +1,6 @@
 import { db } from "@workspace/db";
 import { answers, brands, categories, productCategories, productImages, products, productVariants, questions, reviewImages, reviews, supplementFacts, user } from "@workspace/db/src/schema";
 import { and, asc, count, desc, eq, gte, lte, or, SQL, sql } from "drizzle-orm";
-import type { PgColumn } from "drizzle-orm/pg-core";
 
 export async function getProducts({
   categoryId,

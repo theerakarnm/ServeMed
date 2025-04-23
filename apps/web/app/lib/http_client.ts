@@ -5,6 +5,7 @@ import axios, {
   HttpStatusCode,
   type ResponseType,
 } from "axios";
+import type { UrlBuilded } from "./url_builder";
 
 /**
  * Options for authentication-related headers.
@@ -42,7 +43,7 @@ export class HttpClient {
    * @param defaultConfig - Additional default config for axios.
    */
   constructor(
-    baseURL: string,
+    baseURL: UrlBuilded,
     unauthorizedHandler?: () => void,
     defaultConfig?: AxiosRequestConfig
   ) {

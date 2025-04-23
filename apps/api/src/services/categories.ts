@@ -122,3 +122,37 @@ export async function getCategoryWithProducts(
     return null;
   }
 }
+
+export async function getTopCategories(limit = 5) {
+  try {
+    const query = sql`
+      SELECT
+        ${categories.categoryId} AS "categoryId",
+        ${categories.name},
+        COUNT(${productCategories.productId}) AS "productCount"
+      FROM ${categories} c
+      LEFT JOIN ${productCategories} pc
+        ON ${categories.categoryId} = ${productCategories.categoryId}
+      GROUP BY ${categories.categoryId}, ${categories.name}
+      ORDER BY COUNT(${productCategories.productId}) DESC
+      LIMIT ${limit}
+    `;
+
+    const { rows } = await db.execute(query);
+
+    const topCategories = rows.map((row: {
+      categoryId: number;
+      name: string;
+      productCount: number;
+    }) => ({
+      categoryId: row.categoryId,
+      name: row.name,
+      productCount: Number(row.productCount),
+    }));
+
+    return topCategories;
+  } catch (error) {
+    console.error("Error fetching top categories:", error);
+    return [];
+  }
+}

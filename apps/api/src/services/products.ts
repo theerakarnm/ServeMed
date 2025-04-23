@@ -662,3 +662,108 @@ export async function searchProducts(
     };
   }
 }
+
+export async function getFeaturedProducts() {
+  try {
+    const productList = await db.select({
+      productId: products.productId,
+      name: products.name,
+      brandId: products.brandId,
+      brandName: brands.name,
+      overallRating: products.overallRating,
+      totalReviews: products.totalReviews,
+      isuraVerified: products.isuraVerified,
+      price: sql<number>`MIN(${productVariants.price})`.as("price"),
+      currency: productVariants.currency,
+      imageUrl: productImages.imageUrl,
+    })
+      .from(products)
+      .leftJoin(brands, eq(products.brandId, brands.brandId))
+      .leftJoin(productVariants, eq(products.productId, productVariants.productId))
+      .leftJoin(
+        productImages,
+        and(
+          eq(products.productId, productImages.productId),
+          eq(productImages.isThumbnail, true)
+        )
+      )
+      .where(eq(products.isFeatured, true))
+      .orderBy(desc(products.totalReviews))
+      .limit(10);
+
+    return productList;
+  } catch (error) {
+    console.error("Error fetching featured products:", error);
+    return []
+  }
+}
+
+export async function getTopRankedProducts() {
+  try {
+    const productList = await db
+      .select({
+        productId: products.productId,
+        name: products.name,
+        brandId: products.brandId,
+        brandName: brands.name,
+        overallRating: products.overallRating,
+        totalReviews: products.totalReviews,
+        isuraVerified: products.isuraVerified,
+        price: sql<number>`MIN(${productVariants.price})`.as("price"),
+        currency: productVariants.currency,
+        imageUrl: productImages.imageUrl,
+      })
+      .from(products)
+      .leftJoin(brands, eq(products.brandId, brands.brandId))
+      .leftJoin(productVariants, eq(products.productId, productVariants.productId))
+      .leftJoin(
+        productImages,
+        and(
+          eq(products.productId, productImages.productId),
+          eq(productImages.isThumbnail, true)
+        )
+      )
+      .orderBy(desc(products.overallRating))
+      .limit(10);
+
+    return productList;
+  } catch (error) {
+    console.error("Error fetching top ranked products:", error);
+    return []
+  }
+}
+
+export async function getNewArrivals() {
+  try {
+    const productList = await db
+      .select({
+        productId: products.productId,
+        name: products.name,
+        brandId: products.brandId,
+        brandName: brands.name,
+        overallRating: products.overallRating,
+        totalReviews: products.totalReviews,
+        isuraVerified: products.isuraVerified,
+        price: sql<number>`MIN(${productVariants.price})`.as("price"),
+        currency: productVariants.currency,
+        imageUrl: productImages.imageUrl,
+      })
+      .from(products)
+      .leftJoin(brands, eq(products.brandId, brands.brandId))
+      .leftJoin(productVariants, eq(products.productId, productVariants.productId))
+      .leftJoin(
+        productImages,
+        and(
+          eq(products.productId, productImages.productId),
+          eq(productImages.isThumbnail, true)
+        )
+      )
+      .orderBy(desc(products.createdAt))
+      .limit(10);
+
+    return productList;
+  } catch (error) {
+    console.error("Error fetching top ranked products:", error);
+    return []
+  }
+}

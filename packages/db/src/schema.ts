@@ -134,6 +134,7 @@ export const products = pgTable(
     otherIngredients: text("other_ingredients"),
     warnings: text("warnings"),
     disclaimer: text("disclaimer"),
+    isFeatured: boolean("is_featured").default(false),
     ...commonFields
   },
   (table) => ([{

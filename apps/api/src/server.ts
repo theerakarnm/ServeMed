@@ -19,8 +19,11 @@ app.use('/*', cors({
 app.use("*", prettyJSON());
 
 app.route('/auth', handlers.auth)
+app.route('/products', handlers.products)
 
 export default {
   port: process.env.PORT || 7300,
   fetch: app.fetch,
 }
+
+export type AppType = typeof app

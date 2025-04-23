@@ -19,7 +19,7 @@ app.use('/*', cors({
 app.use("*", prettyJSON());
 
 app.route('/auth', handlers.auth)
-app.route('/products', handlers.products)
+app.route('/products', handlers.productsHandler)
 
 export default {
   port: process.env.PORT || 7300,

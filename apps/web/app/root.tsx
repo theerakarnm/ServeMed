@@ -4,6 +4,7 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
+  useLoaderData,
 } from "@remix-run/react";
 import type { LinksFunction } from "@remix-run/node";
 
@@ -23,6 +24,7 @@ export const links: LinksFunction = () => [
 ];
 
 export function Layout({ children }: { children: React.ReactNode }) {
+  const data = useLoaderData<typeof loader>();
   return (
     <html lang="en">
       <head>
@@ -34,6 +36,14 @@ export function Layout({ children }: { children: React.ReactNode }) {
       <body>
         {children}
         <ScrollRestoration />
+        <script
+          // biome-ignore lint/security/noDangerouslySetInnerHtml: <explanation>
+          dangerouslySetInnerHTML={{
+            __html: `window.ENV = ${JSON.stringify({
+              env: data?.ENV,
+            })}`,
+          }}
+        />
         <Scripts />
       </body>
     </html>
@@ -42,4 +52,12 @@ export function Layout({ children }: { children: React.ReactNode }) {
 
 export default function App() {
   return <Outlet />;
+}
+
+export async function loader() {
+  return Response.json({
+    ENV: {
+      PUBLIC_API_URL: process.env.PUBLIC_API_URL,
+    }
+  });
 }

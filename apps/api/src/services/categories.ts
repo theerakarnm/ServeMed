@@ -130,8 +130,8 @@ export async function getTopCategories(limit = 5) {
         ${categories.categoryId} AS "categoryId",
         ${categories.name},
         COUNT(${productCategories.productId}) AS "productCount"
-      FROM ${categories} c
-      LEFT JOIN ${productCategories} pc
+      FROM ${categories}
+      LEFT JOIN ${productCategories}
         ON ${categories.categoryId} = ${productCategories.categoryId}
       GROUP BY ${categories.categoryId}, ${categories.name}
       ORDER BY COUNT(${productCategories.productId}) DESC

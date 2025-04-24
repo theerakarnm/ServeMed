@@ -688,6 +688,12 @@ export async function getFeaturedProducts() {
       )
       .where(eq(products.isFeatured, true))
       .orderBy(desc(products.totalReviews))
+      .groupBy(
+        products.productId,
+        brands.name,
+        productVariants.currency,
+        productImages.imageUrl
+      )
       .limit(10);
 
     return productList;
@@ -723,6 +729,12 @@ export async function getTopRankedProducts() {
         )
       )
       .orderBy(desc(products.overallRating))
+      .groupBy(
+        products.productId,
+        brands.name,
+        productVariants.currency,
+        productImages.imageUrl
+      )
       .limit(10);
 
     return productList;
@@ -758,6 +770,12 @@ export async function getNewArrivals() {
         )
       )
       .orderBy(desc(products.createdAt))
+      .groupBy(
+        products.productId,
+        brands.name,
+        productVariants.currency,
+        productImages.imageUrl
+      )
       .limit(10);
 
     return productList;

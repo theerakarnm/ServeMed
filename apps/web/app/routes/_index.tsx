@@ -17,6 +17,8 @@ import { Link, useLoaderData } from "@remix-run/react"
 import type { LoaderFunctionArgs } from "@remix-run/node"
 import { categories, products } from '../../../../packages/db/src/schema';
 import Wrapper from "~/layouts/Wrapper"
+import { UrlBuilder } from "~/lib/url_builder"
+import HttpClient from "~/lib/http_client"
 
 export default function HomePage() {
   const data = useLoaderData<typeof loader>()
@@ -170,13 +172,39 @@ export async function loader({ request }: LoaderFunctionArgs) {
     getNewArrivals(),
   ])
 
-  return {
-    featuredProducts,
-    topCategories,
-    featuredBrands,
-    topRankedProducts,
-    newArrivals,
-  };
+  type Product = {
+    productId: number;
+    name: string;
+    brandId: number;
+    brandName: string;
+    overallRating: number;
+    totalReviews: number;
+    price: number;
+    currency: string;
+    isuraVerified: boolean;
+  }
+
+  const url = new UrlBuilder({ path: 'COMPOSE_V1_HOME' }).build()
+  const httpClient = await new HttpClient(url).get<{
+    data: {
+      featuredProducts: Product[]
+      topCategories: {
+        categoryId: number;
+        name: string;
+        productCount: number;
+      }[]
+      featuredBrands: {
+        brandId: number;
+        name: string;
+      }[]
+      topRankedProducts: Product[]
+      newArrivals: Product[]
+    }
+  }>('')
+
+  console.log(httpClient);
+
+  return httpClient.data;
 }
 
 function TopCategories({ categories }: { categories: Awaited<ReturnType<typeof getTopCategories>> }) {

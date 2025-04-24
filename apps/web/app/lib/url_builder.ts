@@ -1,7 +1,7 @@
 import { API_ENDPOINT } from "../configs/api_endpoint";
 import { validateQuery } from "./query";
 
-export type RootEndpointKey = "BACKEND_ENDPOINT";
+export type RootEndpointKey = "PUBLIC_API_URL";
 
 // A built URL is a concatenation of a string and one of the endpoints.
 export type UrlBuilded = `${string}${(typeof API_ENDPOINT)[keyof typeof API_ENDPOINT]}`;
@@ -20,7 +20,7 @@ export class UrlBuilder {
    * @throws Error if the base URL or API endpoint is not found.
    */
   constructor({
-    root = "BACKEND_ENDPOINT",
+    root = "PUBLIC_API_URL",
     path,
   }: {
     root?: RootEndpointKey;

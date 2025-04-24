@@ -10,10 +10,10 @@ import { useProductVariants } from "~/hooks/use-product-variants"
 import { formatCurrency } from "@workspace/ui/lib/formatter"
 import { toast } from "sonner"
 import { Link } from "@remix-run/react"
+import type { ProductDetailResponse } from "~/services/products"
 
 interface ProductInfoProps {
-  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
-  product: any // Using any for now, would be properly typed in a real app
+  product: ProductDetailResponse // Using any for now, would be properly typed in a real app
 }
 
 export default function ProductInfo({ product }: ProductInfoProps) {
@@ -64,7 +64,7 @@ export default function ProductInfo({ product }: ProductInfoProps) {
             // biome-ignore lint/a11y/noSvgWithoutTitle: <explanation>
             <svg
               key={star}
-              className={`h-5 w-5 ${star <= Math.round(product.overallRating || 0) ? "fill-primary" : "fill-muted stroke-muted-foreground"
+              className={`h-5 w-5 ${star <= Math.round(product.overallRating ? +product.overallRating : 0) ? "fill-primary" : "fill-muted stroke-muted-foreground"
                 }`}
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
@@ -74,7 +74,7 @@ export default function ProductInfo({ product }: ProductInfoProps) {
           ))}
         </div>
         <Link to="#reviews" className="text-sm text-muted-foreground hover:text-primary">
-          {product.overallRating?.toFixed(1) || "0.0"} ({product.totalReviews || 0} reviews)
+          {product.overallRating ? (+product.overallRating)?.toFixed(1) : "0.0"} ({product.totalReviews || 0} reviews)
         </Link>
         <Link to="#questions" className="text-sm text-muted-foreground hover:text-primary">
           {product.totalQuestions || 0} questions

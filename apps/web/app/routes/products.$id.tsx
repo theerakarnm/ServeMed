@@ -5,9 +5,11 @@ import ProductInfo from "~/components/features/products/product-info";
 import ProductTabs from "~/components/features/products/product-tabs";
 import RelatedProducts from "~/components/features/products/related-products";
 import RelatedCategories from "~/components/features/products/related-categories";
-import { getProductById, getRelatedProducts, getProductCategories } from "~/data/product";
+import { getRelatedProducts, getProductCategories } from "~/data/product";
 import { Skeleton } from "@workspace/ui/components/skeleton";
 import Wrapper from "~/layouts/Wrapper";
+import { categories } from "../../../../packages/db/src/schema";
+import { getProductById } from "~/services/products";
 
 // Remix loader function to fetch data
 export async function loader({ params }: LoaderFunctionArgs) {

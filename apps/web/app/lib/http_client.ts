@@ -153,7 +153,7 @@ export class HttpClient {
    * @param config      (Optional) Additional axios config options.
    */
   public get<T>(
-    url: string,
+    url?: string,
     options?: HttpClientOptions & {
       signal?: AbortSignal;
       headers?: Record<string, string>;

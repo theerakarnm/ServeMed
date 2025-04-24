@@ -1,5 +1,7 @@
 import { Hono } from "hono";
 import { searchProducts } from "../services/products";
+import * as service from '../services'
+import { HTTPException } from "hono/http-exception";
 
 const handler = new Hono();
 
@@ -39,5 +41,23 @@ handler.get("/search", async (c) => {
     return c.json({ success: false, error: "Search failed" }, 500);
   }
 });
+
+handler.get('/details/:id', async (c) => {
+  const { id } = c.req.param();
+
+  if (Number.isNaN(Number.parseInt(id))) {
+    throw new HTTPException(400, { message: 'Invalid product ID' });
+  }
+
+  const product = await service.productService.getProductDetail(Number.parseInt(id));
+
+  if (!product) {
+    throw new HTTPException(404, { message: 'Product not found' });
+  }
+
+  return c.json({
+    data: product
+  });
+})
 
 export default handler;

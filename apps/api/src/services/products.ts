@@ -149,8 +149,6 @@ export async function getProducts({
   }
 }
 
-
-
 export async function getProductDetail(productId: number) {
   try {
     // Get product basic info
